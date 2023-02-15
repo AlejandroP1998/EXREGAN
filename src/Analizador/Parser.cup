@@ -1,0 +1,87 @@
+package Analizador;
+import java_cup.runtime.*;
+import Analizador.Conjunto;
+
+//PARSER
+parser code
+{://codigo visible
+    Conjunto conjs = new Conjunto();
+    
+    public void syntax_error(Symbol s){
+        System.out.println("Error R de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error NR de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
+    }
+
+    public void addConj(String conjunto,String elemento){
+        conjs.addtoList(conjunto,elemento);
+        conjs.printList();
+    }
+:}
+
+terminal String CONJUNTO;
+terminal String PUNTO;
+terminal String DISY;
+terminal String MULT;
+terminal String PLUS;
+terminal String ITR;
+terminal String TILDE;
+terminal String COMA;
+terminal String JUMPL;
+terminal String COM_SIMPLE;
+terminal String COM_DOBLE;
+terminal String DOS_PUNTOS;
+terminal String PUNTO_COMA;
+terminal String LLAV_ABIERTA;
+terminal String LLAV_CERRADA;
+terminal String ENTERO;
+terminal String DECIMAL;
+terminal String LETRA;
+terminal String IDENTIFICADOR;
+terminal String OPERADOR;
+
+
+non terminal ini;
+non terminal instrucciones;
+non terminal instruccion;
+non terminal expresiones;
+non terminal expresion;
+non terminal String conjunto;
+non terminal String identificador;
+non terminal String operar;
+
+
+
+start with ini;
+
+ini::= LLAV_ABIERTA instrucciones LLAV_CERRADA;
+
+instrucciones::= instruccion instrucciones
+ | instruccion
+;
+
+instruccion ::= 
+    CONJUNTO DOS_PUNTOS identificador:a OPERADOR conjunto:b{: addConj(a,b); :}
+    | error PUNTO_COMA
+;
+
+identificador ::=
+    IDENTIFICADOR:a                                     {: RESULT=a; :}
+;
+
+conjunto ::= 
+    ENTERO:a TILDE ENTERO:b PUNTO_COMA                  {: RESULT=a+"~"+b; :}
+    | LETRA:a TILDE LETRA:b PUNTO_COMA                  {: RESULT=a+"~"+b; :}
+    | LETRA:a COMA LETRA:b  PUNTO_COMA                  {: RESULT=a+","+b; :}
+    | ENTERO:a COMA ENTERO:b PUNTO_COMA                 {: RESULT=a+","+b; :}
+    | ENTERO:a COMA ENTERO:b conjunto:c                 {: RESULT=a+","+b+c; :}
+    | LETRA:a COMA LETRA:b conjunto:c                   {: RESULT=a+","+b+c; :}
+    | COMA ENTERO:a conjunto:b                          {: RESULT=","+a+b; :}
+    | COMA LETRA:a  conjunto:b                          {: RESULT=","+a+b; :}
+    | COMA ENTERO:a PUNTO_COMA                          {: RESULT=","+a; :}
+    | COMA LETRA:a PUNTO_COMA                           {: RESULT=","+a; :}
+    | ENTERO:a PUNTO_COMA                               {: RESULT=a; :}
+    | LETRA:a PUNTO_COMA                                {: RESULT=a; :}
+;
