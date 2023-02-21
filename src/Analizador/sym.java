@@ -8,6 +8,7 @@ package Analizador;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int COMENTARIO_SIMPLE = 22;
   public static final int PUNTO = 3;
   public static final int LLAV_ABIERTA = 15;
   public static final int PLUS = 6;
@@ -52,7 +53,8 @@ public class sym {
   "DECIMAL",
   "LETRA",
   "IDENTIFICADOR",
-  "OPERADOR"
+  "OPERADOR",
+  "COMENTARIO_SIMPLE"
   };
 }
 

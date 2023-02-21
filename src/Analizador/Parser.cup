@@ -42,22 +42,18 @@ terminal String DECIMAL;
 terminal String LETRA;
 terminal String IDENTIFICADOR;
 terminal String OPERADOR;
-
+terminal String COMENTARIO_SIMPLE;
 
 non terminal ini;
 non terminal instrucciones;
 non terminal instruccion;
-non terminal expresiones;
-non terminal expresion;
 non terminal String conjunto;
 non terminal String identificador;
-non terminal String operar;
-
-
 
 start with ini;
 
-ini::= LLAV_ABIERTA instrucciones LLAV_CERRADA;
+ini::= LLAV_ABIERTA instrucciones LLAV_CERRADA
+;
 
 instrucciones::= instruccion instrucciones
  | instruccion
@@ -65,7 +61,6 @@ instrucciones::= instruccion instrucciones
 
 instruccion ::= 
     CONJUNTO DOS_PUNTOS identificador:a OPERADOR conjunto:b{: addConj(a,b); :}
-    | expresion
     | error PUNTO_COMA
 ;
 
@@ -86,8 +81,4 @@ conjunto ::=
     | COMA LETRA:a PUNTO_COMA                           {: RESULT=","+a; :}
     | ENTERO:a PUNTO_COMA                               {: RESULT=a; :}
     | LETRA:a PUNTO_COMA                                {: RESULT=a; :}
-;
-
-expresion ::=
-
 ;

@@ -17,7 +17,6 @@ import java_cup.runtime.Symbol;
 
 
 /* Simbolos */
-
 PUNTO = "."
 DISY = "|"
 MULT = "*"
@@ -25,7 +24,6 @@ PLUS = "+"
 ITR = "?"
 TILDE = "~"
 COMA = ","
-JUMPL = "\n"
 COM_SIMPLE = "\'"
 COM_DOBLE = "\""
 DOS_PUNTOS = ":"
@@ -39,10 +37,13 @@ CONJUNTO = "CONJ"
 /* Expresiones */
 ENTERO = [0-9]+
 DECIMAL = [0-9]+("."[ |0-9]+)?
-SPACE = [\ \r\t\f\t]
-ENTER = [\ \n]
 LETRA = [A-Za-zÑñ_ÁÉÍÓÚáéíóúÜü]
-IDENTIFICADOR = {LETRA} ({LETRA}|{ENTERO})*
+IDENTIFICADOR = ({LETRA}|{ENTERO}) ({LETRA}|{ENTERO})*
+SPACE   = [ ,\t,\r]+
+ENTER   = [\ \n]
+LINEA = "\n"
+COMENTARIO_SIMPLE = "//"({SPACE}|{LETRA}|{ENTERO}) ({SPACE}|{LETRA}|{ENTERO})*
+COMENTARIO_EXTENSO = "<!"({ENTER}|{SPACE}|{LETRA}|{ENTERO}) ({ENTER}|{SPACE}|{LETRA}|{ENTERO})* "!>"
 
 /* Operador de asignación */
 OPERADOR = "->"
@@ -65,8 +66,6 @@ OPERADOR = "->"
 
 <YYINITIAL> {COMA} { return new Symbol(sym.COMA, yyline, yycolumn, yytext());}
 
-<YYINITIAL> {JUMPL} { return new Symbol(sym.JUMPL, yyline, yycolumn, yytext());}
-
 <YYINITIAL> {COM_SIMPLE} { return new Symbol(sym.COM_SIMPLE, yyline, yycolumn, yytext());}
 
 <YYINITIAL> {COM_DOBLE} { return new Symbol(sym.COM_DOBLE, yyline, yycolumn, yytext());}
@@ -83,15 +82,21 @@ OPERADOR = "->"
 
 <YYINITIAL> {DECIMAL} { return new Symbol(sym.DECIMAL, yyline, yycolumn, yytext());}
 
-<YYINITIAL> {SPACE} { /* Ignorar */ }
-
-<YYINITIAL> {ENTER} { /* Ignorar */ }
-
 <YYINITIAL> {LETRA} { return new Symbol(sym.LETRA, yyline, yycolumn, yytext());}
 
 <YYINITIAL> {IDENTIFICADOR} { return new Symbol(sym.IDENTIFICADOR, yyline, yycolumn, yytext());}
 
 <YYINITIAL> {OPERADOR} { return new Symbol(sym.OPERADOR, yyline, yycolumn, yytext());}
+
+<YYINITIAL> {SPACE}     { /* Ignorar */ }
+
+<YYINITIAL> {ENTER}     { /* Ignorar */}
+
+<YYINITIAL> {LINEA}     {/* Ignorar */}
+
+<YYINITIAL> {COMENTARIO_SIMPLE} {/* Ignorar */}
+
+<YYINITIAL> {COMENTARIO_EXTENSO} {/* Ignorar */}
 
 <YYINITIAL> . {
         String errLex = "Error léxico : '"+yytext()+"' en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1);

@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -28,6 +26,8 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         comboArchivo = new javax.swing.JComboBox<>();
         comboReports = new javax.swing.JComboBox<>();
@@ -39,6 +39,11 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         textPanel = new javax.swing.JTextArea();
         ruta = new javax.swing.JLabel();
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EXREGAN PRO");
@@ -91,19 +96,22 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(ruta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(GAbtn)
-                                .addGap(53, 53, 53)
-                                .addComponent(AEbtn))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ruta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(49, 49, 49)
+                                    .addComponent(GAbtn)
+                                    .addGap(53, 53, 53)
+                                    .addComponent(AEbtn))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboReports, 0, 675, Short.MAX_VALUE))))
+                            .addComponent(comboReports, 0, 675, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -132,7 +140,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void comboArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboArchivoActionPerformed
         String seleccion = (String) comboArchivo.getSelectedItem();
-        JFileChooser jf = new JFileChooser();
+        JFileChooser jf = new JFileChooser("/home/bulleye/Documentos/Semestres/1S 2023/Compiladores 1/Proyecto 1");
         FileFilter filter = new FileNameExtensionFilter("OCL File", "ocl");
         File archivo;
         switch (seleccion) {
@@ -142,9 +150,9 @@ public class Menu extends javax.swing.JFrame {
                 jf.showOpenDialog(null);
                 archivo = new File(jf.getSelectedFile() + ".ocl");
                 try {
-                    BufferedWriter salida = new BufferedWriter(new FileWriter(archivo));
-                    salida.write(textPanel.getText());
-                    salida.close();
+                    try (BufferedWriter salida = new BufferedWriter(new FileWriter(archivo))) {
+                        salida.write(textPanel.getText());
+                    }
                 } catch (IOException e) {
                 }
                 break;
@@ -153,9 +161,11 @@ public class Menu extends javax.swing.JFrame {
                 jf.setApproveButtonText("Abrir archivo");
                 jf.setFileFilter(filter);
                 jf.showOpenDialog(null);
-                archivo = new File(jf.getSelectedFile() + "");
-                ruta.setText(jf.getSelectedFile().getAbsolutePath());
                 try {
+                    archivo = new File(jf.getSelectedFile() + "");
+                    if (archivo.exists()) {
+                        ruta.setText(jf.getSelectedFile().getAbsolutePath());
+                    }
                     BufferedReader salida = new BufferedReader(new FileReader(archivo));
                     String leer = salida.readLine();
                     while (leer != null) {
@@ -208,14 +218,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void AEbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AEbtnActionPerformed
 
-//        interpretar("{"
-//                + "CONJ: entero -> 1,2,3;"
-//                + "CONJ: letra -> a,b,c;"
-//                + "CONJ: inter -> A~B;"
-//                + "CONJ: inter2 -> 1~20;"
-//                + "CONJ: num -> 2,3,4,5,6,7,8,9;"
-//                + "}"
-//        );
+        interpretar(textPanel.getText());
 
     }//GEN-LAST:event_AEbtnActionPerformed
 
@@ -244,14 +247,6 @@ public class Menu extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                interpretar("{"
-//                        + "CONJ: entero -> 1,2,3;"
-//                        + "CONJ: letra -> a,b,c;"
-//                        + "CONJ: inter -> A~B;"
-//                        + "CONJ: inter2 -> 1~20;"
-//                        + "CONJ: num -> 2,3,4,5,6,7,8,9;"
-//                        + "}"
-//                );
                 new Menu().setVisible(true);
             }
         });
@@ -267,9 +262,6 @@ public class Menu extends javax.swing.JFrame {
         }
     }
 
-    public void recibirData() {
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AEbtn;
     private javax.swing.JButton GAbtn;
@@ -277,6 +269,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboReports;
     private javax.swing.JTextPane console;
     private javax.swing.JLabel imgLabel;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
