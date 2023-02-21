@@ -13,7 +13,7 @@ import java.util.LinkedList;
  */
 public class Conjunto {
 
-    LinkedList<Conjunto> li = new LinkedList<Conjunto>();
+    LinkedList<Conjunto> li = new LinkedList<>();
     public String[] items;
     public String nombre;
 
@@ -31,8 +31,17 @@ public class Conjunto {
 
     }
 
+    public LinkedList<Conjunto> getLi() {
+        return li;
+    }
+
+    public void setLi(LinkedList<Conjunto> li) {
+        this.li = li;
+    }
+
     public void addtoList(String nombre, String conjunto) {
         li.add(new Conjunto(nombre, conjunto));
+        setLi(li);
     }
 
     public void printList() {
@@ -41,4 +50,9 @@ public class Conjunto {
             System.out.println("Nombre del conjunto: " + item.nombre + " \nelementos: " + Arrays.toString(item.items));
         }
     }
+    
+    public LinkedList<Conjunto> sendList(){
+        return li;
+    }
+    
 }

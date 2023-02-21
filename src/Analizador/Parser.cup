@@ -2,6 +2,7 @@ package Analizador;
 import java_cup.runtime.*;
 import Analizador.Conjunto;
 
+
 //PARSER
 parser code
 {://codigo visible
@@ -64,6 +65,7 @@ instrucciones::= instruccion instrucciones
 
 instruccion ::= 
     CONJUNTO DOS_PUNTOS identificador:a OPERADOR conjunto:b{: addConj(a,b); :}
+    | expresion
     | error PUNTO_COMA
 ;
 
@@ -84,4 +86,8 @@ conjunto ::=
     | COMA LETRA:a PUNTO_COMA                           {: RESULT=","+a; :}
     | ENTERO:a PUNTO_COMA                               {: RESULT=a; :}
     | LETRA:a PUNTO_COMA                                {: RESULT=a; :}
+;
+
+expresion ::=
+
 ;
