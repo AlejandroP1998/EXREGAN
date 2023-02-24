@@ -7,7 +7,6 @@ import Analizador.Conjunto;
 parser code
 {://codigo visible
     Conjunto conjs = new Conjunto();
-    
     public void syntax_error(Symbol s){
         System.out.println("Error R de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
@@ -30,7 +29,6 @@ terminal String PLUS;
 terminal String ITR;
 terminal String TILDE;
 terminal String COMA;
-terminal String JUMPL;
 terminal String COM_SIMPLE;
 terminal String COM_DOBLE;
 terminal String DOS_PUNTOS;
@@ -38,17 +36,23 @@ terminal String PUNTO_COMA;
 terminal String LLAV_ABIERTA;
 terminal String LLAV_CERRADA;
 terminal String ENTERO;
-terminal String DECIMAL;
+terminal String ASCII;
+/* terminal String DECIMAL; */
 terminal String LETRA;
 terminal String IDENTIFICADOR;
 terminal String OPERADOR;
-terminal String COMENTARIO_SIMPLE;
+terminal String SEPARADOR;
 
 non terminal ini;
 non terminal instrucciones;
 non terminal instruccion;
 non terminal String conjunto;
 non terminal String identificador;
+non terminal String ascii;
+non terminal String Symbol;
+non terminal String expresion;
+non terminal String exp;
+non terminal String conjCall;
 
 start with ini;
 
@@ -61,12 +65,21 @@ instrucciones::= instruccion instrucciones
 
 instruccion ::= 
     CONJUNTO DOS_PUNTOS identificador:a OPERADOR conjunto:b{: addConj(a,b); :}
+    | expresion:a {: System.out.println(a); :}
+    | SEPARADOR
     | error PUNTO_COMA
 ;
 
 identificador ::=
-    IDENTIFICADOR:a                                     {: RESULT=a; :}
+    IDENTIFICADOR:a     {: RESULT=a; :}
+    | LETRA:a           {: RESULT=a; :}
+    | ENTERO:a          {: RESULT=a; :}
 ;
+
+ascii ::=
+    ASCII:a {: RESULT=a; :}
+;
+
 
 conjunto ::= 
     ENTERO:a TILDE ENTERO:b PUNTO_COMA                  {: RESULT=a+"~"+b; :}
@@ -77,8 +90,103 @@ conjunto ::=
     | LETRA:a COMA LETRA:b conjunto:c                   {: RESULT=a+","+b+c; :}
     | COMA ENTERO:a conjunto:b                          {: RESULT=","+a+b; :}
     | COMA LETRA:a  conjunto:b                          {: RESULT=","+a+b; :}
-    | COMA ENTERO:a PUNTO_COMA                          {: RESULT=","+a; :}
-    | COMA LETRA:a PUNTO_COMA                           {: RESULT=","+a; :}
     | ENTERO:a PUNTO_COMA                               {: RESULT=a; :}
     | LETRA:a PUNTO_COMA                                {: RESULT=a; :}
+    | ascii:a TILDE ascii:b PUNTO_COMA                  {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE Symbol:b PUNTO_COMA                 {: RESULT=a+"~"+b; :}
+    | Symbol:a TILDE ascii:b PUNTO_COMA                 {: RESULT=a+"~"+b; :}
+    | ascii:a COMA ascii:b PUNTO_COMA                   {: RESULT=a+","+b; :}
+    | ascii:a COMA ascii:b conjunto:c                   {: RESULT=a+","+b+c; :}
+    | COMA ascii:a PUNTO_COMA                           {: RESULT=","+a; :}
+    | Symbol:a COMA ascii:b PUNTO_COMA                  {: RESULT=a+","+b; :}
+    | Symbol:a COMA ascii:b conjunto:c                  {: RESULT=a+","+b+c; :}
+    | ascii:a COMA Symbol:b PUNTO_COMA                  {: RESULT=a+","+b; :}
+    | ascii:a COMA Symbol:b conjunto:c                  {: RESULT=a+","+b+c; :}
+    | COMA ascii:a conjunto:b                           {: RESULT=","+a+b; :}
+    | ascii:a TILDE COM_DOBLE:b PUNTO_COMA              {: RESULT=a+"~"+b; :}
+    | COM_DOBLE:a TILDE ascii:b PUNTO_COMA              {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE COM_SIMPLE:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
+    | COM_SIMPLE:a TILDE ascii:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE COMA:b PUNTO_COMA                   {: RESULT=a+"~"+b; :}
+    | COMA:a TILDE ascii:b PUNTO_COMA                   {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE DOS_PUNTOS:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
+    | DOS_PUNTOS:a TILDE ascii:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE PUNTO_COMA:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
+    | PUNTO_COMA:a TILDE ascii:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE LLAV_ABIERTA:b PUNTO_COMA           {: RESULT=a+"~"+b; :}
+    | LLAV_ABIERTA:a TILDE ascii:b PUNTO_COMA           {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE LLAV_CERRADA:b PUNTO_COMA           {: RESULT=a+"~"+b; :}
+    | LLAV_CERRADA:a TILDE ascii:b PUNTO_COMA           {: RESULT=a+"~"+b; :}
+    | COMA COM_DOBLE:a conjunto:b                       {: RESULT=","+a+b; :}
+    | COMA COM_SIMPLE:a conjunto:b                      {: RESULT=","+a+b; :}
+    | COMA DOS_PUNTOS:a conjunto:b                      {: RESULT=","+a+b; :}
+    | COMA PUNTO_COMA:a conjunto:b                      {: RESULT=","+a+b; :}
+    | COMA LLAV_ABIERTA:a conjunto:b                    {: RESULT=","+a+b; :}
+    | COMA LLAV_CERRADA:a conjunto:b                    {: RESULT=","+a+b; :}
 ;
+
+expresion ::=
+    identificador:a OPERADOR exp:b PUNTO_COMA {: RESULT="EXPRESION: "+a+" -> "+b; :}
+;
+
+
+exp ::= 
+    Symbol:a conjCall:b                 {: RESULT= a+b; :}
+    | Symbol:a conjCall:b exp:c         {: RESULT=a+b+c; :}
+    | Symbol:a exp:b                    {: RESULT=a+b; :}
+;
+
+conjCall ::= 
+    LLAV_ABIERTA identificador:a LLAV_CERRADA                   {: RESULT="{"+a+"}"; :}
+    | LLAV_ABIERTA identificador:a LLAV_CERRADA conjCall:b      {: RESULT="{"+a+"}"+b; :}
+    | COM_DOBLE identificador:a COM_DOBLE                       {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE identificador:a COM_DOBLE conjCall:b            {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE identificador:a COM_SIMPLE                     {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE identificador:a COM_SIMPLE conjCall:b          {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE ascii:a COM_DOBLE                               {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE ascii:a COM_DOBLE conjCall:b                    {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE ascii:a COM_SIMPLE                             {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE ascii:a COM_SIMPLE conjCall:b                  {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE Symbol:a COM_DOBLE                              {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE Symbol:a COM_DOBLE conjCall:b                   {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE Symbol:a COM_SIMPLE                            {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE Symbol:a COM_SIMPLE conjCall:b                 {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE  COM_DOBLE:a COM_DOBLE                          {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE  COM_DOBLE:a COM_DOBLE conjCall:b               {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE COM_DOBLE:a COM_SIMPLE                         {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE COM_DOBLE:a COM_SIMPLE conjCall:b              {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE  COM_SIMPLE:a COM_DOBLE                         {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE  COM_SIMPLE:a COM_DOBLE conjCall:b              {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE COM_SIMPLE:a COM_SIMPLE                        {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE COM_SIMPLE:a COM_SIMPLE conjCall:b             {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE  COMA:a COM_DOBLE                               {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE  COMA:a COM_DOBLE conjCall:b                    {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE COMA:a COM_SIMPLE                              {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE COMA:a COM_SIMPLE conjCall:b                   {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE  DOS_PUNTOS:a COM_DOBLE                         {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE  DOS_PUNTOS:a COM_DOBLE conjCall:b              {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE DOS_PUNTOS:a COM_SIMPLE                        {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE DOS_PUNTOS:a COM_SIMPLE conjCall:b             {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE  PUNTO_COMA:a COM_DOBLE                         {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE  PUNTO_COMA:a COM_DOBLE conjCall:b              {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE PUNTO_COMA:a COM_SIMPLE                        {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE PUNTO_COMA:a COM_SIMPLE conjCall:b             {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE  LLAV_ABIERTA:a COM_DOBLE                       {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE  LLAV_ABIERTA:a COM_DOBLE conjCall:b            {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE LLAV_ABIERTA:a COM_SIMPLE                      {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE LLAV_ABIERTA:a COM_SIMPLE conjCall:b           {: RESULT="\'"+a+"\'"+b; :}
+    | COM_DOBLE  LLAV_CERRADA:a COM_DOBLE                       {: RESULT="\""+a+"\""; :}
+    | COM_DOBLE  LLAV_CERRADA:a COM_DOBLE conjCall:b            {: RESULT="\""+a+"\""+b; :}
+    | COM_SIMPLE LLAV_CERRADA:a COM_SIMPLE                      {: RESULT="\'"+a+"\'"; :}
+    | COM_SIMPLE LLAV_CERRADA:a COM_SIMPLE conjCall:b           {: RESULT="\'"+a+"\'"+b; :}
+
+;
+
+Symbol ::=
+    PUNTO:a                                          {: RESULT=a; :}
+    | DISY:a                                         {: RESULT=a; :}
+    | MULT:a                                         {: RESULT=a; :}
+    | PLUS:a                                         {: RESULT=a; :}
+    | ITR:a                                          {: RESULT=a; :}
+;
+

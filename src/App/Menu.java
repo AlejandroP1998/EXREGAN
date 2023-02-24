@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java_cup.terminal;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -31,14 +32,14 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         comboArchivo = new javax.swing.JComboBox<>();
         comboReports = new javax.swing.JComboBox<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        console = new javax.swing.JTextPane();
         imgLabel = new javax.swing.JLabel();
         GAbtn = new javax.swing.JButton();
         AEbtn = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         textPanel = new javax.swing.JTextArea();
         ruta = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        terminal = new javax.swing.JTextArea();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -46,7 +47,10 @@ public class Menu extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("EXREGAN PRO");
+        setTitle("EXREGAN USAC");
+        setAlwaysOnTop(true);
+        setAutoRequestFocus(false);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jScrollPane1.setAutoscrolls(true);
 
@@ -65,10 +69,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane3.setViewportView(console);
-
-        imgLabel.setText("Image");
-
         GAbtn.setText("Generar automatas");
         GAbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,9 +83,19 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        textPanel.setBackground(new java.awt.Color(0, 0, 0));
         textPanel.setColumns(20);
+        textPanel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        textPanel.setForeground(new java.awt.Color(51, 255, 51));
         textPanel.setRows(5);
         jScrollPane4.setViewportView(textPanel);
+
+        terminal.setBackground(new java.awt.Color(0, 0, 0));
+        terminal.setColumns(20);
+        terminal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        terminal.setForeground(new java.awt.Color(204, 0, 0));
+        terminal.setRows(5);
+        jScrollPane3.setViewportView(terminal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,22 +106,22 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ruta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(49, 49, 49)
-                                    .addComponent(GAbtn)
-                                    .addGap(53, 53, 53)
-                                    .addComponent(AEbtn))))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboReports, 0, 675, Short.MAX_VALUE)
+                            .addComponent(ruta, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(imgLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(41, 41, 41)
+                                .addComponent(GAbtn)
+                                .addGap(61, 61, 61)
+                                .addComponent(AEbtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(177, 177, 177)
+                                .addComponent(comboReports, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 668, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,15 +134,16 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(ruta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                    .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GAbtn)
                     .addComponent(AEbtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -140,7 +151,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void comboArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboArchivoActionPerformed
         String seleccion = (String) comboArchivo.getSelectedItem();
-        JFileChooser jf = new JFileChooser("/home/bulleye/Documentos/Semestres/1S 2023/Compiladores 1/Proyecto 1");
+        JFileChooser jf = new JFileChooser("/home/bulleye/Documentos/Semestres/1S 2023/Compiladores 1/Proyecto 1/Entradas");
         FileFilter filter = new FileNameExtensionFilter("OCL File", "ocl");
         File archivo;
         switch (seleccion) {
@@ -217,9 +228,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_GAbtnActionPerformed
 
     private void AEbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AEbtnActionPerformed
-
         interpretar(textPanel.getText());
-
+        terminal.setText("Analisis finalizado");
     }//GEN-LAST:event_AEbtnActionPerformed
 
     public static void main(String args[]) {
@@ -254,7 +264,6 @@ public class Menu extends javax.swing.JFrame {
 
     private static void interpretar(String entrada) {
         try {
-
             scanner scanner = new scanner(new java.io.StringReader(entrada));
             parser parser = new parser(scanner);
             parser.parse();
@@ -267,7 +276,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton GAbtn;
     private javax.swing.JComboBox<String> comboArchivo;
     private javax.swing.JComboBox<String> comboReports;
-    private javax.swing.JTextPane console;
     private javax.swing.JLabel imgLabel;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
@@ -275,6 +283,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel ruta;
+    private javax.swing.JTextArea terminal;
     private javax.swing.JTextArea textPanel;
     // End of variables declaration//GEN-END:variables
 }

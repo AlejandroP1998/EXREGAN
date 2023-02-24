@@ -36,17 +36,55 @@ CONJUNTO = "CONJ"
 
 /* Expresiones */
 ENTERO = [0-9]+
-DECIMAL = [0-9]+("."[ |0-9]+)?
+/* DECIMAL = [0-9]+("."[ |0-9]+)? */
 LETRA = [A-Za-zÑñ_ÁÉÍÓÚáéíóúÜü]
 IDENTIFICADOR = ({LETRA}|{ENTERO}) ({LETRA}|{ENTERO})*
 SPACE   = [ ,\t,\r]+
 ENTER   = [\ \n]
 LINEA = "\n"
-COMENTARIO_SIMPLE = "//"({SPACE}|{LETRA}|{ENTERO}) ({SPACE}|{LETRA}|{ENTERO})*
+COMENTARIO_SIMPLE = "//"+ ({SPACE}|{LETRA}|{ENTERO}) ({SPACE}|{LETRA}|{ENTERO})*
 COMENTARIO_EXTENSO = "<!"({ENTER}|{SPACE}|{LETRA}|{ENTERO}) ({ENTER}|{SPACE}|{LETRA}|{ENTERO})* "!>"
+
+/* ASCII */
+ASCII33 = "!"
+/* ASCII34 = COM_DOBLE */
+ASCII35 = "#"
+ASCII36 = "$"
+ASCII37 = "%"
+ASCII38 = "&"
+/* ASCII39 = COM_SIMPLE */
+ASCII40 = "("
+ASCII41 = ")"
+/* ASCII42 = MULT
+ASCII43 = PLUS
+ASCII44 = COMA */
+ASCII45 = "-"
+/* ASCII46 = PUNTO */
+ASCII47 = "/"
+/* ASCII58 = DOS_PUNTOS
+ASCII59 = PUNTO_COMA */
+ASCII60 = "<"
+ASCII61 = "="
+ASCII62 = ">"
+/* ASCII63 = ITR */
+ASCII64 = "@"
+ASCII91 = "["
+ASCII92 = "\\"
+ASCII93 = "]"
+ASCII94 = "^"
+ASCII95 = "_"
+ASCII96 = "`"
+/* ASCII123 = LLAV_ABIERTA
+ASCII124 = DISY
+ASCII125 = LLAV_CERRADA */
+
+ASCII = ({ASCII33}|{ASCII35}|{ASCII36}|{ASCII37}|{ASCII38}|{ASCII40}|{ASCII41}|{ASCII45}|{ASCII47}|{ASCII60}|{ASCII61}|{ASCII62}|{ASCII64}|{ASCII91}|{ASCII92}|{ASCII93}|{ASCII94}|{ASCII95}|{ASCII96})
 
 /* Operador de asignación */
 OPERADOR = "->"
+
+/* Separador */
+SEPARADOR = "%%"
 
 %%
 
@@ -80,8 +118,8 @@ OPERADOR = "->"
 
 <YYINITIAL> {ENTERO} { return new Symbol(sym.ENTERO, yyline, yycolumn, yytext());}
 
-<YYINITIAL> {DECIMAL} { return new Symbol(sym.DECIMAL, yyline, yycolumn, yytext());}
-
+/* <YYINITIAL> {DECIMAL} { return new Symbol(sym.DECIMAL, yyline, yycolumn, yytext());}
+ */
 <YYINITIAL> {LETRA} { return new Symbol(sym.LETRA, yyline, yycolumn, yytext());}
 
 <YYINITIAL> {IDENTIFICADOR} { return new Symbol(sym.IDENTIFICADOR, yyline, yycolumn, yytext());}
@@ -97,6 +135,10 @@ OPERADOR = "->"
 <YYINITIAL> {COMENTARIO_SIMPLE} {/* Ignorar */}
 
 <YYINITIAL> {COMENTARIO_EXTENSO} {/* Ignorar */}
+
+<YYINITIAL> {ASCII} { return new Symbol(sym.ASCII, yyline, yycolumn, yytext());}
+
+<YYINITIAL> {SEPARADOR} { return new Symbol(sym.SEPARADOR, yyline, yycolumn, yytext()) ;}
 
 <YYINITIAL> . {
         String errLex = "Error léxico : '"+yytext()+"' en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1);

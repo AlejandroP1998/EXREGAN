@@ -8,28 +8,27 @@ package Analizador;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int COMENTARIO_SIMPLE = 22;
   public static final int PUNTO = 3;
-  public static final int LLAV_ABIERTA = 15;
+  public static final int LLAV_ABIERTA = 14;
   public static final int PLUS = 6;
   public static final int CONJUNTO = 2;
-  public static final int LETRA = 19;
-  public static final int DECIMAL = 18;
+  public static final int LETRA = 18;
   public static final int ITR = 7;
   public static final int TILDE = 8;
-  public static final int COM_DOBLE = 12;
-  public static final int DOS_PUNTOS = 13;
-  public static final int COM_SIMPLE = 11;
-  public static final int LLAV_CERRADA = 16;
+  public static final int COM_DOBLE = 11;
+  public static final int DOS_PUNTOS = 12;
+  public static final int COM_SIMPLE = 10;
+  public static final int LLAV_CERRADA = 15;
+  public static final int SEPARADOR = 21;
   public static final int COMA = 9;
-  public static final int JUMPL = 10;
   public static final int EOF = 0;
   public static final int MULT = 5;
-  public static final int OPERADOR = 21;
+  public static final int OPERADOR = 20;
   public static final int error = 1;
-  public static final int IDENTIFICADOR = 20;
-  public static final int PUNTO_COMA = 14;
-  public static final int ENTERO = 17;
+  public static final int IDENTIFICADOR = 19;
+  public static final int PUNTO_COMA = 13;
+  public static final int ASCII = 17;
+  public static final int ENTERO = 16;
   public static final int DISY = 4;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -42,7 +41,6 @@ public class sym {
   "ITR",
   "TILDE",
   "COMA",
-  "JUMPL",
   "COM_SIMPLE",
   "COM_DOBLE",
   "DOS_PUNTOS",
@@ -50,11 +48,11 @@ public class sym {
   "LLAV_ABIERTA",
   "LLAV_CERRADA",
   "ENTERO",
-  "DECIMAL",
+  "ASCII",
   "LETRA",
   "IDENTIFICADOR",
   "OPERADOR",
-  "COMENTARIO_SIMPLE"
+  "SEPARADOR"
   };
 }
 
