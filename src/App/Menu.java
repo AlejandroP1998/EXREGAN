@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java_cup.terminal;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -20,7 +19,7 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
-        this.setSize(super.getToolkit().getScreenSize());
+        this.setExtendedState(this.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")
@@ -93,7 +92,7 @@ public class Menu extends javax.swing.JFrame {
         terminal.setBackground(new java.awt.Color(0, 0, 0));
         terminal.setColumns(20);
         terminal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        terminal.setForeground(new java.awt.Color(204, 0, 0));
+        terminal.setForeground(new java.awt.Color(255, 255, 255));
         terminal.setRows(5);
         jScrollPane3.setViewportView(terminal);
 
@@ -151,21 +150,31 @@ public class Menu extends javax.swing.JFrame {
 
     private void comboArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboArchivoActionPerformed
         String seleccion = (String) comboArchivo.getSelectedItem();
-        JFileChooser jf = new JFileChooser("/home/bulleye/Documentos/Semestres/1S 2023/Compiladores 1/Proyecto 1/Entradas");
+        this.setVisible(false);
+        JFileChooser jf = new JFileChooser("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Entradas");
         FileFilter filter = new FileNameExtensionFilter("OCL File", "ocl");
         File archivo;
+        terminal.setText("");
         switch (seleccion) {
             case "Nuevo archivo":
                 jf.setApproveButtonText("Crear nuevo archivo");
                 jf.setFileFilter(filter);
                 jf.showOpenDialog(null);
-                archivo = new File(jf.getSelectedFile() + ".ocl");
-                try {
-                    try (BufferedWriter salida = new BufferedWriter(new FileWriter(archivo))) {
-                        salida.write(textPanel.getText());
+                if (jf.getSelectedFile() != null) {
+                    archivo = new File(jf.getSelectedFile() + ".ocl");
+                    try {
+                        try (BufferedWriter salida = new BufferedWriter(new FileWriter(archivo))) {
+                            salida.write(textPanel.getText());
+                            System.out.println(archivo);
+                            terminal.setText("Nuevo archivo creado con exito");
+                        }
+                    } catch (IOException e) {
+                        terminal.setText("No se pudo crear el archivo");
                     }
-                } catch (IOException e) {
+                } else {
+                    terminal.setText("No se pudo crear el archivo");
                 }
+
                 break;
 
             case "Abrir archivo":
@@ -176,51 +185,67 @@ public class Menu extends javax.swing.JFrame {
                     archivo = new File(jf.getSelectedFile() + "");
                     if (archivo.exists()) {
                         ruta.setText(jf.getSelectedFile().getAbsolutePath());
+                        BufferedReader salida = new BufferedReader(new FileReader(archivo));
+                        String leer = salida.readLine();
+                        textPanel.setText(null);
+                        while (leer != null) {
+                            textPanel.append(leer + "\n");
+                            leer = salida.readLine();
+                        }
+                        terminal.setText("Archivo abierto con exito");
+                    } else {
+                        terminal.setText("No se pudo abrir el archivo");
                     }
-                    BufferedReader salida = new BufferedReader(new FileReader(archivo));
-                    String leer = salida.readLine();
-                    while (leer != null) {
-                        textPanel.append(leer + "\n");
-                        leer = salida.readLine();
-                    }
+
                 } catch (IOException e) {
+                    terminal.setText("No se pudo abrir el archivo");
                 }
                 break;
 
             case "Guardar":
-                try {
-                FileChannel.open(Path.of(ruta.getText()), StandardOpenOption.WRITE)
-                        .truncate(0).close();
+               try {
+                FileChannel.open(Path.of(ruta.getText()), StandardOpenOption.WRITE).truncate(0).close();
                 archivo = new File(ruta.getText());
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
                     bw.write(textPanel.getText());
+                    terminal.setText("Archivo actualizado con exito");
                 }
             } catch (IOException e) {
+                terminal.setText("No se logro actualizar el archivo");
             }
             break;
 
             case "Guardar como":
-                jf.setApproveButtonText("Abrir archivo");
+                jf.setApproveButtonText("Guardar archivo");
                 jf.setFileFilter(filter);
                 jf.showSaveDialog(null);
                 jf.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-                archivo = new File(jf.getSelectedFile() + ".ocl");
-                try {
-                    try (FileWriter escribir = new FileWriter(archivo, true)) {
-                        escribir.write(textPanel.getText());
+                if (jf.getSelectedFile() != null) {
+                    archivo = new File(jf.getSelectedFile() + ".ocl");
+                    try {
+                        try (FileWriter escribir = new FileWriter(archivo, true)) {
+                            escribir.write(textPanel.getText());
+                            terminal.setText("Archivo guardado con exito");
+                        }
+                    } catch (IOException e) {
+                        terminal.setText("No se logro guardar el archivo");
                     }
-                } catch (IOException e) {
+
+                }else{
+                    terminal.setText("No se logro guardar el archivo");
                 }
                 break;
             default:
                 throw new AssertionError();
         }
+        this.setVisible(true);
 //        System.out.println(seleccion);
     }//GEN-LAST:event_comboArchivoActionPerformed
 
     private void comboReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboReportsActionPerformed
         String seleccion = (String) comboReports.getSelectedItem();
-        System.out.println(seleccion);
+        terminal.setText("");
+        terminal.setText(seleccion);
     }//GEN-LAST:event_comboReportsActionPerformed
 
     private void GAbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GAbtnActionPerformed
@@ -229,7 +254,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void AEbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AEbtnActionPerformed
         interpretar(textPanel.getText());
-        terminal.setText("Analisis finalizado");
+        terminal.setText("Analisis finalizado"
+                + "\nRevisar reportes");
     }//GEN-LAST:event_AEbtnActionPerformed
 
     public static void main(String args[]) {
