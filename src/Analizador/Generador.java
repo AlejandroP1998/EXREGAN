@@ -16,7 +16,7 @@ public class Generador {
             java_cup.Main.main(opcCUP);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error al tratar de generar los archivos CUP y JFLEX\n"+e);
         }
     }
 

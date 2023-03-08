@@ -2,6 +2,7 @@ package App;
 
 import Analizador.parser;
 import Analizador.scanner;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,6 +12,8 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -39,6 +42,8 @@ public class Menu extends javax.swing.JFrame {
         ruta = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         terminal = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -61,7 +66,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(comboArchivo);
 
-        comboReports.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arboles", "Siguientes", "Transciciones", "Automatas" }));
+        comboReports.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arboles", "Siguientes", "Transiciones", "Automatas" }));
         comboReports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboReportsActionPerformed(evt);
@@ -96,6 +101,20 @@ public class Menu extends javax.swing.JFrame {
         terminal.setRows(5);
         jScrollPane3.setViewportView(terminal);
 
+        jButton1.setText("Ver errores");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Ver archivos de salida");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,25 +122,27 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ruta, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(GAbtn)
-                                .addGap(61, 61, 61)
-                                .addComponent(AEbtn))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(177, 177, 177)
                                 .addComponent(comboReports, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 668, Short.MAX_VALUE))
+                        .addContainerGap(674, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                            .addComponent(AEbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(GAbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,14 +155,20 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(ruta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                    .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GAbtn)
-                    .addComponent(AEbtn))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AEbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(GAbtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
 
@@ -231,7 +258,7 @@ public class Menu extends javax.swing.JFrame {
                         terminal.setText("No se logro guardar el archivo");
                     }
 
-                }else{
+                } else {
                     terminal.setText("No se logro guardar el archivo");
                 }
                 break;
@@ -244,8 +271,91 @@ public class Menu extends javax.swing.JFrame {
 
     private void comboReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboReportsActionPerformed
         String seleccion = (String) comboReports.getSelectedItem();
-        terminal.setText("");
-        terminal.setText(seleccion);
+        switch (seleccion) {
+            case "Arboles":
+                this.setVisible(false);
+                JFileChooser jf1 = new JFileChooser("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\Arboles_201712602");
+                FileFilter filter1 = new FileNameExtensionFilter("JPG File", "jpg");
+                File archivo;
+                terminal.setText("");
+                jf1.setApproveButtonText("Cargar arbol");
+                jf1.setFileFilter(filter1);
+                jf1.showOpenDialog(null);
+                if (jf1.getSelectedFile() != null) {
+                    archivo = new File(jf1.getSelectedFile() + "");
+                    ImageIcon img = new ImageIcon(archivo.getAbsolutePath());
+                    Icon icon = new ImageIcon(
+                            img.getImage().getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), Image.SCALE_DEFAULT)
+                    );
+
+                    imgLabel.setIcon(icon);
+                    terminal.setText("Imagen del arbol cargada con exito");
+                }
+                break;
+            case "Siguientes":
+                this.setVisible(false);
+                JFileChooser jf2 = new JFileChooser("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\SIGUIENTES_201712602");
+                FileFilter filter2 = new FileNameExtensionFilter("JPG File", "jpg");
+                File archivo2;
+                terminal.setText("");
+                jf2.setApproveButtonText("Cargar tabla");
+                jf2.setFileFilter(filter2);
+                jf2.showOpenDialog(null);
+                if (jf2.getSelectedFile() != null) {
+                    archivo2 = new File(jf2.getSelectedFile() + "");
+                    ImageIcon img = new ImageIcon(archivo2.getAbsolutePath());
+                    Icon icon = new ImageIcon(
+                            img.getImage().getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), Image.SCALE_DEFAULT)
+                    );
+
+                    imgLabel.setIcon(icon);
+                    terminal.setText("Imagen de tabla de siguientes cargada con exito");
+                }
+                break;
+            case "Transiciones":
+                this.setVisible(false);
+                JFileChooser jf3 = new JFileChooser("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\TRANSICIONES_201712602");
+                FileFilter filter3 = new FileNameExtensionFilter("JPG File", "jpg");
+                File archivo3;
+                terminal.setText("");
+                jf3.setApproveButtonText("Cargar tabla");
+                jf3.setFileFilter(filter3);
+                jf3.showOpenDialog(null);
+                if (jf3.getSelectedFile() != null) {
+                    archivo3 = new File(jf3.getSelectedFile() + "");
+                    ImageIcon img = new ImageIcon(archivo3.getAbsolutePath());
+                    Icon icon = new ImageIcon(
+                            img.getImage().getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), Image.SCALE_DEFAULT)
+                    );
+
+                    imgLabel.setIcon(icon);
+                    terminal.setText("Imagen de tabla de transiciones cargada con exito");
+                }
+                break;
+            case "Automatas":
+                this.setVisible(false);
+                JFileChooser jf4 = new JFileChooser("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\AFD_201712602");
+                FileFilter filter4 = new FileNameExtensionFilter("JPG File", "jpg");
+                File archivo4;
+                terminal.setText("");
+                jf4.setApproveButtonText("Cargar automata");
+                jf4.setFileFilter(filter4);
+                jf4.showOpenDialog(null);
+                if (jf4.getSelectedFile() != null) {
+                    archivo4 = new File(jf4.getSelectedFile() + "");
+                    ImageIcon img = new ImageIcon(archivo4.getAbsolutePath());
+                    Icon icon = new ImageIcon(
+                            img.getImage().getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), Image.SCALE_DEFAULT)
+                    );
+
+                    imgLabel.setIcon(icon);
+                    terminal.setText("Imagen de automatas cargada con exito");
+                }
+                break;
+            default:
+                throw new AssertionError();
+        }
+        this.setVisible(true);
     }//GEN-LAST:event_comboReportsActionPerformed
 
     private void GAbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GAbtnActionPerformed
@@ -257,6 +367,14 @@ public class Menu extends javax.swing.JFrame {
         terminal.setText("Analisis finalizado"
                 + "\nRevisar reportes");
     }//GEN-LAST:event_AEbtnActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -303,6 +421,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboArchivo;
     private javax.swing.JComboBox<String> comboReports;
     private javax.swing.JLabel imgLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;

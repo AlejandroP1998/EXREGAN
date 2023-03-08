@@ -510,8 +510,6 @@ public class scanner implements java_cup.runtime.Scanner {
     while (true) {
       zzMarkedPosL = zzMarkedPos;
 
-      yychar+= zzMarkedPosL-zzStartRead;
-
       boolean zzR = false;
       int zzCh;
       int zzCharCount;
@@ -527,10 +525,12 @@ public class scanner implements java_cup.runtime.Scanner {
         case '\u2028':  // fall through
         case '\u2029':
           yyline++;
+          yycolumn = 0;
           zzR = false;
           break;
         case '\r':
           yyline++;
+          yycolumn = 0;
           zzR = true;
           break;
         case '\n':
@@ -538,10 +538,12 @@ public class scanner implements java_cup.runtime.Scanner {
             zzR = false;
           else {
             yyline++;
+            yycolumn = 0;
           }
           break;
         default:
           zzR = false;
+          yycolumn += zzCharCount;
         }
       }
 

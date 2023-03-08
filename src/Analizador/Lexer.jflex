@@ -11,7 +11,7 @@ import java_cup.runtime.Symbol;
 %cup
 %public
 %line
-%char
+%column
 %unicode
 %ignorecase
 

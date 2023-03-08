@@ -1,11 +1,13 @@
 package Analizador;
 import java_cup.runtime.*;
 import Analizador.Conjunto;
+import App.Brain;
 
 
 //PARSER
 parser code
 {://codigo visible
+    Brain br = new Brain();
     Conjunto conjs = new Conjunto();
     public void syntax_error(Symbol s){
         System.out.println("Error R de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
@@ -15,10 +17,19 @@ parser code
         System.out.println("Error NR de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
 
+    
     public void addConj(String conjunto,String elemento){
-        conjs.addtoList(conjunto,elemento);
-        conjs.printList();
+        br.addConj(conjunto,elemento);
     }
+
+    public void printList(){
+        br.printListConj();
+    }
+
+    public void analizarER(String er, String erName){
+        br.analizarER(er,erName);
+    }
+
 :}
 
 terminal String CONJUNTO;
@@ -53,6 +64,7 @@ non terminal String Symbol;
 non terminal String expresion;
 non terminal String exp;
 non terminal String conjCall;
+non terminal String separadores;
 
 start with ini;
 
@@ -65,8 +77,8 @@ instrucciones::= instruccion instrucciones
 
 instruccion ::= 
     CONJUNTO DOS_PUNTOS identificador:a OPERADOR conjunto:b{: addConj(a,b); :}
-    | expresion:a {: System.out.println(a); :}
-    | SEPARADOR
+    | expresion:a
+    | separadores
     | error PUNTO_COMA
 ;
 
@@ -126,7 +138,7 @@ conjunto ::=
 ;
 
 expresion ::=
-    identificador:a OPERADOR exp:b PUNTO_COMA {: RESULT="EXPRESION: "+a+" -> "+b; :}
+    identificador:a OPERADOR exp:b PUNTO_COMA {: br.analizarER(b,a); :}
 ;
 
 
@@ -190,3 +202,6 @@ Symbol ::=
     | ITR:a                                          {: RESULT=a; :}
 ;
 
+separadores ::=
+    SEPARADOR
+;

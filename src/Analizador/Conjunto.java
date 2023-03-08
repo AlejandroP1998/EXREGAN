@@ -1,12 +1,12 @@
 package Analizador;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 public class Conjunto {
 
-    LinkedList<Conjunto> li = new LinkedList<>();
-    public LinkedList<String> items = new LinkedList<>();
+    ArrayList<Conjunto> li = new ArrayList<>();
+    public ArrayList<String> items = new ArrayList<>();
     public String nombre;
 
     public Conjunto() {
@@ -83,11 +83,11 @@ public class Conjunto {
 
     }
 
-    public LinkedList<Conjunto> getLi() {
+    public ArrayList<Conjunto> getLi() {
         return li;
     }
 
-    public void setLi(LinkedList<Conjunto> li) {
+    public void setLi(ArrayList<Conjunto> li) {
         this.li = li;
     }
 
@@ -103,7 +103,7 @@ public class Conjunto {
         }
     }
 
-    public LinkedList<Conjunto> sendList() {
+    public ArrayList<Conjunto> sendList() {
         return li;
     }
 
