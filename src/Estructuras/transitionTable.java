@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 public class transitionTable {
 
@@ -91,7 +92,16 @@ public class transitionTable {
 
     public String impTable(String expName) {
         StringBuilder str = new StringBuilder();
+        String afd = "";
+        afd += "digraph G { \n"
+                + "graph [ dpi = 700 ] \n"
+                + "label = <AFD: " + expName + "> \n"
+                + "labelloc = t \n"
+                + "fontsize=30 \n"
+                + "rankdir=LR;\n";
+
         str.append("digraph G {").append("\n");
+        str.append("splines=false;").append("\n");
         str.append("graph [ dpi = 700 ];").append("\n");
         str.append("label = <Tabla de transiciones: ").append(expName).append(">\nlabelloc = t\nfontsize=30").append("\n");
         str.append("tbl [").append("\n");
@@ -108,29 +118,47 @@ public class transitionTable {
             }
             tran += "]";
 
-            tran = tran.replace(", ]", "");
-            tran = tran.replace("->", "");
+            tran = tran.replace(",", " ; ");
             tran = tran.replace("[", "");
             tran = tran.replace("]", "");
-            String[] estados = tran.split(" ");
-            
+            String arreglo = tran;
+            String[] afdArray = arreglo.split(";");
+            for (String afdArray2 : afdArray) {
+                String[] afdArray1 = afdArray2.split(" -> ");
+                if (afdArray1.length > 1) {
+                    String nodo = "node" + UUID.randomUUID().toString().replace("-", "");
+                    String nodoC = nodo + "[shape=\"none\" label=\"" + afdArray1[1] + "\"]";
+                    afdArray1[1] = nodoC;
+                    afd += nodoC + "\n";
+                    afd += afdArray1[0] + " -> " + nodo + " -> " + afdArray1[2] + ";\n";
+                }
+
+            }
+
+            if (state.get(3).equals(true)) {
+                afd += state.get(0) + "[shape=\"doublecircle\"]";
+            }
+
+            tran = tran.replace("->", " --- ");
+
             str.append("<tr>"
                     + "<td>").append(state.get(0)).append("</td>"
-                    + "<td>").append(estados[0]).append("</td>"
-                    + "<td>").append(estados[estados.length-1]).append("</td>"
+                    + "<td colspan=\"2\">").append(tran).append("</td>"
                     + "</tr>").append("\n");
-            //System.out.println(state.get(0) + " " + state.get(1) + " " + tran + " " + state.get(3));
+            //System.out.println(state.get(0) + "-> " + state.get(1) + "-> " + tran + "aceptacion " + state.get(3));
         }
         str.append("</table>").append("\n");
         str.append(">];").append("\n");
         str.append("}").append("\n");
         String chain = str.toString();
+        afd += "}";
+        GenerarDotAFD(afd, expName);
         return chain;
     }
 
-    public void GenerarDot(String cadena,String name) {
+    public void GenerarDot(String cadena, String name) {
         FileWriter fichero = null;
-        String ruta = "C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\TRANSICIONES_201712602\\"+name+".dot";
+        String ruta = "C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\TRANSICIONES_201712602\\" + name + ".dot";
         try {
             fichero = new FileWriter(ruta);
             PrintWriter pw = null;
@@ -139,7 +167,7 @@ public class transitionTable {
             pw.write(cadena);
             pw.close();
             fichero.close();
-            dibujarGraphviz(ruta,name);
+            dibujarGraphviz(ruta, name);
         } catch (IOException e) {
         } finally {
             try {
@@ -151,11 +179,53 @@ public class transitionTable {
         }
     }
 
-    public void dibujarGraphviz(String ruta,String name) {
+    public void dibujarGraphviz(String ruta, String name) {
         try {
 
             ProcessBuilder pbuilder;
-            String imagenRuta = "C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\TRANSICIONES_201712602\\"+name+".jpg";
+            String imagenRuta = "C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\TRANSICIONES_201712602\\" + name + ".jpg";
+            pbuilder = new ProcessBuilder("dot", "-Tjpg", "-o",
+                    imagenRuta,
+                    ruta);
+            pbuilder.redirectErrorStream(true);
+            //Ejecuta el proceso
+            pbuilder.start();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void GenerarDotAFD(String cadena, String name) {
+        FileWriter fichero = null;
+        String ruta = "C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\AFD_201712602\\" + name + ".dot";
+        try {
+            fichero = new FileWriter(ruta);
+            PrintWriter pw = null;
+            pw = new PrintWriter(fichero);
+            //System.out.println(cadena);
+            pw.write(cadena);
+            pw.close();
+            fichero.close();
+            dibujarGraphvizAFD(ruta, name);
+        } catch (IOException e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (IOException e2) {
+                System.out.println(e2);
+            }
+        }
+    }
+
+    public void dibujarGraphvizAFD(String ruta, String name) {
+        try {
+
+            ProcessBuilder pbuilder;
+            String imagenRuta = "C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\AFD_201712602\\" + name + ".jpg";
             pbuilder = new ProcessBuilder("dot", "-Tjpg", "-o",
                     imagenRuta,
                     ruta);

@@ -11,6 +11,7 @@ public class sym {
   public static final int PUNTO = 3;
   public static final int LLAV_ABIERTA = 14;
   public static final int PLUS = 6;
+  public static final int GUION_BAJO = 22;
   public static final int CONJUNTO = 2;
   public static final int LETRA = 18;
   public static final int ITR = 7;
@@ -52,7 +53,8 @@ public class sym {
   "LETRA",
   "IDENTIFICADOR",
   "OPERADOR",
-  "SEPARADOR"
+  "SEPARADOR",
+  "GUION_BAJO"
   };
 }
 

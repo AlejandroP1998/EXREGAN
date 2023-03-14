@@ -72,13 +72,13 @@ ASCII91 = "["
 ASCII92 = "\\"
 ASCII93 = "]"
 ASCII94 = "^"
-ASCII95 = "_"
+GUION_BAJO = "_"
 ASCII96 = "`"
 /* ASCII123 = LLAV_ABIERTA
 ASCII124 = DISY
 ASCII125 = LLAV_CERRADA */
 
-ASCII = ({ASCII33}|{ASCII35}|{ASCII36}|{ASCII37}|{ASCII38}|{ASCII40}|{ASCII41}|{ASCII45}|{ASCII47}|{ASCII60}|{ASCII61}|{ASCII62}|{ASCII64}|{ASCII91}|{ASCII92}|{ASCII93}|{ASCII94}|{ASCII95}|{ASCII96})
+ASCII = ({ASCII33}|{ASCII35}|{ASCII36}|{ASCII37}|{ASCII38}|{ASCII40}|{ASCII41}|{ASCII45}|{ASCII47}|{ASCII60}|{ASCII61}|{ASCII62}|{ASCII64}|{ASCII91}|{ASCII92}|{ASCII93}|{ASCII94}|{ASCII96})
 
 /* Operador de asignación */
 OPERADOR = "->"
@@ -139,6 +139,8 @@ SEPARADOR = "%%"
 <YYINITIAL> {ASCII} { return new Symbol(sym.ASCII, yyline, yycolumn, yytext());}
 
 <YYINITIAL> {SEPARADOR} { return new Symbol(sym.SEPARADOR, yyline, yycolumn, yytext()) ;}
+
+<YYINITIAL> {GUION_BAJO} { return new Symbol(sym.GUION_BAJO, yyline, yycolumn, yytext()) ;}
 
 <YYINITIAL> . {
         String errLex = "Error léxico : '"+yytext()+"' en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1);

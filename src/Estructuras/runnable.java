@@ -2,7 +2,6 @@ package Estructuras;
 
 import java.util.ArrayList;
 
-
 public class runnable {
 
     /**
@@ -18,37 +17,44 @@ public class runnable {
             5. Tabla de primeros y ultimos
             6. Tabla de siguientes
             7. Tabla de transiciones y diagrama de estados
-        */
-        
+         */
+
         // La ER estara en prefijo
         // a . b -> . a b 
         // se aceptara el . | *
         //String er = "...ab*b*|ab";
         //String er = "...*|ababb";
-        String er = "...*|ababb";
+        //String er = "...*|ababb";
         //String er = ".{letra}* | \"_\" | {letra} {digito}";
         //String er = ".{digito}.\".\" +{digito}";
         //String er = ".{digito}* | \"_\" | {letra}{digito}";
-        
+        String er = ".|{minuscula} {mayuscula} . + | | | {simbolos} {minuscula} {mayuscula} {numero} . \"@\" . + | {minuscula}{mayuscula} . \".\". \"c\" . \"o\" \"m\"";
+
         ArrayList<node> leaves = new ArrayList();
         ArrayList<ArrayList> table = new ArrayList();
-        
+
         er = "." + er + "#";
-        
-        Tree arbol = new Tree(er, leaves, table); // CREA EL ARBOL
-        node raiz = arbol.getRoot();
-        
-        raiz.getNode(); // DETERMINA SI LOS NODOS SON ANULABLES, SUS PRIMEROS Y ULTIMOS
-        raiz.follow();
-        
-        //System.out.println("==============================TABLA SIGUIENTES==============================");
-        followTable ft = new followTable();
-        String str = ft.printTable(table,"expresion de prueba");
-        ft.GenerarDot(str,"prueba");
-        transitionTable tran = new transitionTable(raiz, table, leaves); // bug
-        //System.out.println("=============================TABLA TRANSICIONES=============================");
-        String str2 = tran.impTable("expresion de prueba");
-        tran.GenerarDot(str2,"prueba");
+
+        //System.out.println("elementos: "+arbol.elementos);
+        try {
+            Tree arbol = new Tree(er, leaves, table, "arbol de prueba"); // CREA EL ARBOL
+            arbol.arbolGraph.append("}");
+            String chain = arbol.arbolGraph.toString();
+            arbol.GenerarDot(chain, "arbol de prueba");
+            node raiz = arbol.getRoot();
+            raiz.getNode(); // DETERMINA SI LOS NODOS SON ANULABLES, SUS PRIMEROS Y ULTIMOS
+            raiz.follow();
+            //System.out.println("==============================TABLA SIGUIENTES==============================");
+            followTable ft = new followTable();
+            String str = ft.printTable(table, "expresion de prueba");
+            ft.GenerarDot(str, "prueba");
+            transitionTable tran = new transitionTable(raiz, table, leaves); // bug
+            //System.out.println("=============================TABLA TRANSICIONES=============================");
+            String str2 = tran.impTable("expresion de prueba");
+            tran.GenerarDot(str2, "prueba");
+        } catch (NullPointerException e) {
+        }
+
     }
-    
+
 }

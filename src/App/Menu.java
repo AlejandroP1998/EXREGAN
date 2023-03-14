@@ -15,6 +15,7 @@ import java.nio.file.StandardOpenOption;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -23,6 +24,8 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -35,15 +38,13 @@ public class Menu extends javax.swing.JFrame {
         comboArchivo = new javax.swing.JComboBox<>();
         comboReports = new javax.swing.JComboBox<>();
         imgLabel = new javax.swing.JLabel();
-        GAbtn = new javax.swing.JButton();
         AEbtn = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        textPanel = new javax.swing.JTextArea();
         ruta = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         terminal = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        erroresbtn = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textPanel = new javax.swing.JTextArea();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -55,6 +56,7 @@ public class Menu extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().setLayout(null);
 
         jScrollPane1.setAutoscrolls(true);
 
@@ -66,33 +68,30 @@ public class Menu extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(comboArchivo);
 
-        comboReports.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arboles", "Siguientes", "Transiciones", "Automatas" }));
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(138, 6, 216, 40);
+
+        comboReports.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arboles", "Siguientes", "Transiciones", "JSON de salida", "AFD", "AFND" }));
         comboReports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboReportsActionPerformed(evt);
             }
         });
+        getContentPane().add(comboReports);
+        comboReports.setBounds(500, 6, 216, 40);
+        getContentPane().add(imgLabel);
+        imgLabel.setBounds(500, 53, 796, 384);
 
-        GAbtn.setText("Generar automatas");
-        GAbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GAbtnActionPerformed(evt);
-            }
-        });
-
-        AEbtn.setText("Analizar cadenas y generar json");
+        AEbtn.setText("Analizar archivo");
         AEbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AEbtnActionPerformed(evt);
             }
         });
-
-        textPanel.setBackground(new java.awt.Color(0, 0, 0));
-        textPanel.setColumns(20);
-        textPanel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        textPanel.setForeground(new java.awt.Color(51, 255, 51));
-        textPanel.setRows(5);
-        jScrollPane4.setViewportView(textPanel);
+        getContentPane().add(AEbtn);
+        AEbtn.setBounds(10, 684, 470, 40);
+        getContentPane().add(ruta);
+        ruta.setBounds(1427, 47, 584, 0);
 
         terminal.setBackground(new java.awt.Color(0, 0, 0));
         terminal.setColumns(20);
@@ -101,76 +100,27 @@ public class Menu extends javax.swing.JFrame {
         terminal.setRows(5);
         jScrollPane3.setViewportView(terminal);
 
-        jButton1.setText("Ver errores");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(500, 466, 1020, 320);
+
+        erroresbtn.setText("Ver errores");
+        erroresbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                erroresbtnActionPerformed(evt);
             }
         });
+        getContentPane().add(erroresbtn);
+        erroresbtn.setBounds(10, 734, 470, 40);
 
-        jButton2.setText("Ver archivos de salida");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        textPanel.setBackground(new java.awt.Color(0, 0, 0));
+        textPanel.setColumns(20);
+        textPanel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        textPanel.setForeground(new java.awt.Color(51, 255, 51));
+        textPanel.setRows(5);
+        jScrollPane4.setViewportView(textPanel);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ruta, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(177, 177, 177)
-                                .addComponent(comboReports, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(674, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                            .addComponent(AEbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(GAbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(comboReports)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                .addGap(10, 10, 10)
-                .addComponent(ruta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(imgLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AEbtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(GAbtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(10, 60, 473, 627);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -285,7 +235,7 @@ public class Menu extends javax.swing.JFrame {
                     archivo = new File(jf1.getSelectedFile() + "");
                     ImageIcon img = new ImageIcon(archivo.getAbsolutePath());
                     Icon icon = new ImageIcon(
-                            img.getImage().getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), Image.SCALE_DEFAULT)
+                            img.getImage().getScaledInstance(imgLabel.getWidth() - 500, imgLabel.getHeight(), Image.SCALE_DEFAULT)
                     );
 
                     imgLabel.setIcon(icon);
@@ -332,7 +282,7 @@ public class Menu extends javax.swing.JFrame {
                     terminal.setText("Imagen de tabla de transiciones cargada con exito");
                 }
                 break;
-            case "Automatas":
+            case "AFD":
                 this.setVisible(false);
                 JFileChooser jf4 = new JFileChooser("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\AFD_201712602");
                 FileFilter filter4 = new FileNameExtensionFilter("JPG File", "jpg");
@@ -358,23 +308,40 @@ public class Menu extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_comboReportsActionPerformed
 
-    private void GAbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GAbtnActionPerformed
-
-    }//GEN-LAST:event_GAbtnActionPerformed
-
     private void AEbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AEbtnActionPerformed
-        interpretar(textPanel.getText());
-        terminal.setText("Analisis finalizado"
-                + "\nRevisar reportes");
+        String texto = textPanel.getText();
+        if (texto.isBlank()) {
+            this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Ingrese algo para poder analizar", "No hay nada que analizar", JOptionPane.WARNING_MESSAGE);
+            this.setVisible(true);
+            terminal.setText("No hay nada para analizar");
+        } else {
+            interpretar(textPanel.getText());
+            terminal.setText("Analisis finalizado"
+                    + "\nRevisar reportes");
+        }
     }//GEN-LAST:event_AEbtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void erroresbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_erroresbtnActionPerformed
+        this.setVisible(false);
+                JFileChooser jf = new JFileChooser("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\ERRORES_201712602");
+                FileFilter filter = new FileNameExtensionFilter("JPG File", "jpg");
+                File archivo;
+                terminal.setText("");
+                jf.setApproveButtonText("Ver errores");
+                jf.setFileFilter(filter);
+                jf.showOpenDialog(null);
+                if (jf.getSelectedFile() != null) {
+                    archivo = new File(jf.getSelectedFile() + "");
+                    ImageIcon img = new ImageIcon(archivo.getAbsolutePath());
+                    Icon icon = new ImageIcon(
+                            img.getImage().getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), Image.SCALE_DEFAULT)
+                    );
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+                    imgLabel.setIcon(icon);
+                    terminal.setText("Archivo de errores cargado con exito");
+                }
+    }//GEN-LAST:event_erroresbtnActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -417,12 +384,10 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AEbtn;
-    private javax.swing.JButton GAbtn;
     private javax.swing.JComboBox<String> comboArchivo;
     private javax.swing.JComboBox<String> comboReports;
+    private javax.swing.JButton erroresbtn;
     private javax.swing.JLabel imgLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;

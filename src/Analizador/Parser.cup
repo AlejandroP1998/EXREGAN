@@ -53,6 +53,7 @@ terminal String LETRA;
 terminal String IDENTIFICADOR;
 terminal String OPERADOR;
 terminal String SEPARADOR;
+terminal String GUION_BAJO;
 
 non terminal ini;
 non terminal instrucciones;
@@ -76,7 +77,7 @@ instrucciones::= instruccion instrucciones
 ;
 
 instruccion ::= 
-    CONJUNTO DOS_PUNTOS identificador:a OPERADOR conjunto:b{: addConj(a,b); :}
+    CONJUNTO DOS_PUNTOS identificador:a OPERADOR conjunto:b PUNTO_COMA {: addConj(a,b); :}
     | expresion:a
     | separadores
     | error PUNTO_COMA
@@ -92,50 +93,115 @@ ascii ::=
     ASCII:a {: RESULT=a; :}
 ;
 
+conjunto ::=
+    ENTERO:a TILDE ENTERO:b                  {: RESULT=a+"~"+b; :}
+    | LETRA:a TILDE LETRA:b                  {: RESULT=a+"~"+b; :}
+    | LETRA:a COMA LETRA:b                   {: RESULT=a+","+b; :}
+    | LETRA:a COMA LETRA:b conjunto:c        {: RESULT=a+","+b+c; :}
+    | ENTERO:a COMA ENTERO:b                 {: RESULT=a+","+b; :}
+    | ENTERO:a COMA ENTERO:b conjunto:c      {: RESULT=a+","+b+c; :}
+    | COMA ENTERO:a conjunto:b               {: RESULT=","+a+b; :}
+    | COMA LETRA:a  conjunto:b               {: RESULT=","+a+b; :}
+    | ascii:a TILDE ascii:b                  {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE Symbol:b                 {: RESULT=a+"~"+b; :}
+    | Symbol:a TILDE ascii:b                 {: RESULT=a+"~"+b; :}
+    | ascii:a COMA ascii:b                   {: RESULT=a+","+b; :}
+    | ascii:a COMA ascii:b conjunto:c        {: RESULT=a+","+b+c; :}
+    | Symbol:a COMA ascii:b                  {: RESULT=a+","+b; :}
+    | Symbol:a COMA ascii:b conjunto:c       {: RESULT=a+","+b+c; :}
+    | ascii:a COMA Symbol:b                  {: RESULT=a+","+b; :}
+    | ascii:a COMA Symbol:b conjunto:c       {: RESULT=a+","+b+c; :}
+    | ascii:a TILDE COM_DOBLE:b              {: RESULT=a+"~"+b; :}
+    | COM_DOBLE:a TILDE ascii:b              {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE COM_SIMPLE:b             {: RESULT=a+"~"+b; :}
+    | COM_SIMPLE:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE COMA:b                   {: RESULT=a+"~"+b; :}
+    | COMA:a TILDE ascii:b                   {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE DOS_PUNTOS:b             {: RESULT=a+"~"+b; :}
+    | DOS_PUNTOS:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE LLAV_ABIERTA:b           {: RESULT=a+"~"+b; :}
+    | LLAV_ABIERTA:a TILDE ascii:b           {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE LLAV_CERRADA:b           {: RESULT=a+"~"+b; :}
+    | LLAV_CERRADA:a TILDE ascii:b           {: RESULT=a+"~"+b; :}
+    | COMA COM_DOBLE:a conjunto:b            {: RESULT=","+a+b; :}
+    | COMA COM_SIMPLE:a conjunto:b           {: RESULT=","+a+b; :}
+    | COMA DOS_PUNTOS:a conjunto:b           {: RESULT=","+a+b; :}
+    | COMA PUNTO_COMA:a conjunto:b           {: RESULT=","+a+b; :}
+    | COMA LLAV_ABIERTA:a conjunto:b         {: RESULT=","+a+b; :}
+    | COMA LLAV_CERRADA:a conjunto:b         {: RESULT=","+a+b; :}
+    | COMA ascii:a                           {: RESULT=","+a; :}
+    | COMA Symbol:a                          {: RESULT=","+a; :}
+    | COMA LETRA:a                           {: RESULT=","+a; :}
+    | COMA ENTERO:a                          {: RESULT=","+a; :}
+    | COMA COM_DOBLE:a                          {: RESULT=","+a; :}
+    | COMA COM_SIMPLE:a                          {: RESULT=","+a; :}
+    | COMA DOS_PUNTOS:a                          {: RESULT=","+a; :}
+    | COMA PUNTO_COMA:a                          {: RESULT=","+a; :}
+    | COMA LLAV_ABIERTA:a                               {: RESULT=","+a; :}
+    | COMA LLAV_CERRADA:a                               {: RESULT=","+a; :}
+    | ascii:a COMA COM_SIMPLE:b                         {: RESULT=a + ","+b; :}
+    | ascii:a COMA COM_DOBLE:b                          {: RESULT=a + ","+b; :}
+    | ascii:a COMA DOS_PUNTOS:b                         {: RESULT=a + ","+b; :}
+    | ascii:a COMA PUNTO_COMA:b                         {: RESULT=a + ","+b; :}
+    | ascii:a COMA LLAV_ABIERTA:b                       {: RESULT=a + ","+b; :}
+    | ascii:a COMA LLAV_CERRADA:b                       {: RESULT=a + ","+b; :}
+    | ascii:a TILDE GUION_BAJO:b                        {: RESULT=a+"~"+b; :}
+    | GUION_BAJO:a TILDE ascii:b                        {: RESULT=a+"~"+b; :}
+    | COMA GUION_BAJO:a                                 {: RESULT=","+a; :}
+    | ascii:a COMA GUION_BAJO:b                         {: RESULT=a + ","+b; :}
+    | GUION_BAJO:a COMA ascii:b                         {: RESULT=a + ","+b; :}
 
-conjunto ::= 
-    ENTERO:a TILDE ENTERO:b PUNTO_COMA                  {: RESULT=a+"~"+b; :}
-    | LETRA:a TILDE LETRA:b PUNTO_COMA                  {: RESULT=a+"~"+b; :}
-    | LETRA:a COMA LETRA:b  PUNTO_COMA                  {: RESULT=a+","+b; :}
-    | ENTERO:a COMA ENTERO:b PUNTO_COMA                 {: RESULT=a+","+b; :}
-    | ENTERO:a COMA ENTERO:b conjunto:c                 {: RESULT=a+","+b+c; :}
-    | LETRA:a COMA LETRA:b conjunto:c                   {: RESULT=a+","+b+c; :}
-    | COMA ENTERO:a conjunto:b                          {: RESULT=","+a+b; :}
-    | COMA LETRA:a  conjunto:b                          {: RESULT=","+a+b; :}
-    | ENTERO:a PUNTO_COMA                               {: RESULT=a; :}
-    | LETRA:a PUNTO_COMA                                {: RESULT=a; :}
-    | ascii:a TILDE ascii:b PUNTO_COMA                  {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE Symbol:b PUNTO_COMA                 {: RESULT=a+"~"+b; :}
-    | Symbol:a TILDE ascii:b PUNTO_COMA                 {: RESULT=a+"~"+b; :}
-    | ascii:a COMA ascii:b PUNTO_COMA                   {: RESULT=a+","+b; :}
-    | ascii:a COMA ascii:b conjunto:c                   {: RESULT=a+","+b+c; :}
-    | COMA ascii:a PUNTO_COMA                           {: RESULT=","+a; :}
-    | Symbol:a COMA ascii:b PUNTO_COMA                  {: RESULT=a+","+b; :}
-    | Symbol:a COMA ascii:b conjunto:c                  {: RESULT=a+","+b+c; :}
-    | ascii:a COMA Symbol:b PUNTO_COMA                  {: RESULT=a+","+b; :}
-    | ascii:a COMA Symbol:b conjunto:c                  {: RESULT=a+","+b+c; :}
-    | COMA ascii:a conjunto:b                           {: RESULT=","+a+b; :}
-    | ascii:a TILDE COM_DOBLE:b PUNTO_COMA              {: RESULT=a+"~"+b; :}
-    | COM_DOBLE:a TILDE ascii:b PUNTO_COMA              {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE COM_SIMPLE:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
-    | COM_SIMPLE:a TILDE ascii:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE COMA:b PUNTO_COMA                   {: RESULT=a+"~"+b; :}
-    | COMA:a TILDE ascii:b PUNTO_COMA                   {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE DOS_PUNTOS:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
-    | DOS_PUNTOS:a TILDE ascii:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE PUNTO_COMA:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
-    | PUNTO_COMA:a TILDE ascii:b PUNTO_COMA             {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE LLAV_ABIERTA:b PUNTO_COMA           {: RESULT=a+"~"+b; :}
-    | LLAV_ABIERTA:a TILDE ascii:b PUNTO_COMA           {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE LLAV_CERRADA:b PUNTO_COMA           {: RESULT=a+"~"+b; :}
-    | LLAV_CERRADA:a TILDE ascii:b PUNTO_COMA           {: RESULT=a+"~"+b; :}
-    | COMA COM_DOBLE:a conjunto:b                       {: RESULT=","+a+b; :}
-    | COMA COM_SIMPLE:a conjunto:b                      {: RESULT=","+a+b; :}
-    | COMA DOS_PUNTOS:a conjunto:b                      {: RESULT=","+a+b; :}
-    | COMA PUNTO_COMA:a conjunto:b                      {: RESULT=","+a+b; :}
-    | COMA LLAV_ABIERTA:a conjunto:b                    {: RESULT=","+a+b; :}
-    | COMA LLAV_CERRADA:a conjunto:b                    {: RESULT=","+a+b; :}
+
+
+    
 ;
+    /* 
+    | ascii:a TILDE PUNTO_COMA:b             {: RESULT=a+"~"+b; :}
+    | PUNTO_COMA:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
+     */
+/* conjunto ::= 
+    ENTERO:a TILDE ENTERO:b                  {: RESULT=a+"~"+b; :}
+    | LETRA:a TILDE LETRA:b                  {: RESULT=a+"~"+b; :}
+    | LETRA:a COMA LETRA:b                   {: RESULT=a+","+b; :}
+    | ENTERO:a COMA ENTERO:b                 {: RESULT=a+","+b; :}
+    | ENTERO:a COMA ENTERO:b conjunto:c      {: RESULT=a+","+b+c; :}
+    | LETRA:a COMA LETRA:b conjunto:c        {: RESULT=a+","+b+c; :}
+    | COMA ENTERO:a conjunto:b               {: RESULT=","+a+b; :}
+    | COMA LETRA:a  conjunto:b               {: RESULT=","+a+b; :}
+    | ENTERO:a                               {: RESULT=a; :}
+    | LETRA:a                                {: RESULT=a; :}
+    | ascii:a TILDE ascii:b                  {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE Symbol:b                 {: RESULT=a+"~"+b; :}
+    | Symbol:a TILDE ascii:b                 {: RESULT=a+"~"+b; :}
+    | ascii:a COMA ascii:b                   {: RESULT=a+","+b; :}
+    | ascii:a COMA ascii:b conjunto:c        {: RESULT=a+","+b+c; :}
+    | COMA ascii:a                           {: RESULT=","+a; :}
+    | Symbol:a COMA ascii:b                  {: RESULT=a+","+b; :}
+    | Symbol:a COMA ascii:b conjunto:c       {: RESULT=a+","+b+c; :}
+    | ascii:a COMA Symbol:b                  {: RESULT=a+","+b; :}
+    | ascii:a COMA Symbol:b conjunto:c       {: RESULT=a+","+b+c; :}
+    | COMA ascii:a conjunto:b                {: RESULT=","+a+b; :}
+    | ascii:a TILDE COM_DOBLE:b              {: RESULT=a+"~"+b; :}
+    | COM_DOBLE:a TILDE ascii:b              {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE COM_SIMPLE:b             {: RESULT=a+"~"+b; :}
+    | COM_SIMPLE:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE COMA:b                   {: RESULT=a+"~"+b; :}
+    | COMA:a TILDE ascii:b                   {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE DOS_PUNTOS:b             {: RESULT=a+"~"+b; :}
+    | DOS_PUNTOS:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE PUNTO_COMA:b             {: RESULT=a+"~"+b; :}
+    | PUNTO_COMA:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE LLAV_ABIERTA:b           {: RESULT=a+"~"+b; :}
+    | LLAV_ABIERTA:a TILDE ascii:b           {: RESULT=a+"~"+b; :}
+    | ascii:a TILDE LLAV_CERRADA:b           {: RESULT=a+"~"+b; :}
+    | LLAV_CERRADA:a TILDE ascii:b           {: RESULT=a+"~"+b; :}
+    | COMA COM_DOBLE:a conjunto:b            {: RESULT=","+a+b; :}
+    | COMA COM_SIMPLE:a conjunto:b           {: RESULT=","+a+b; :}
+    | COMA DOS_PUNTOS:a conjunto:b           {: RESULT=","+a+b; :}
+    | COMA PUNTO_COMA:a conjunto:b           {: RESULT=","+a+b; :}
+    | COMA LLAV_ABIERTA:a conjunto:b         {: RESULT=","+a+b; :}
+    | COMA LLAV_CERRADA:a conjunto:b         {: RESULT=","+a+b; :}
+; */
 
 expresion ::=
     identificador:a OPERADOR exp:b PUNTO_COMA {: br.analizarER(b,a); :}
