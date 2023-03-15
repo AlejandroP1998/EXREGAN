@@ -32,6 +32,9 @@ public class Brain {
             String chain = arbol.arbolGraph.toString();
             arbol.GenerarDot(chain, expName);
             node raiz = arbol.getRoot();
+            arbol.afnd.append("}");
+            String chain2 = arbol.afnd.toString();
+            arbol.GenerarDotThompson(chain2, expName);
 
             raiz.getNode(); // DETERMINA SI LOS NODOS SON ANULABLES, SUS PRIMEROS Y ULTIMOS
             raiz.follow();

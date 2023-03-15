@@ -4,13 +4,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class transitionTable {
 
     public ArrayList<ArrayList> states;
     public int cont;
+    
 
     public transitionTable(node root, ArrayList tabla, ArrayList<node> leaves) {
         this.states = new ArrayList();
@@ -91,6 +91,7 @@ public class transitionTable {
     }
 
     public String impTable(String expName) {
+        
         StringBuilder str = new StringBuilder();
         String afd = "";
         afd += "digraph G { \n"
@@ -134,6 +135,7 @@ public class transitionTable {
                 }
 
             }
+            
 
             if (state.get(3).equals(true)) {
                 afd += state.get(0) + "[shape=\"doublecircle\"]";
