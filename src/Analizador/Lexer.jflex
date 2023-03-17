@@ -1,10 +1,10 @@
 package Analizador;
 import java_cup.runtime.Symbol;
-
+import App.Brain;
 %%
 
 %{
-    /* Codigo de usuario */
+    Brain br = new Brain();
 %}
 
 %class scanner
@@ -148,5 +148,7 @@ IDENTIFICADOR = ({LETRA}|{ENTERO}|{ASCII}) ({LETRA}|{ENTERO}|{ASCII})*
 
 <YYINITIAL> . {
         String errLex = "Error léxico : '"+yytext()+"' en la línea: "+(yyline+1)+" y columna: "+(yycolumn+1);
-        System.out.println(errLex);
+        //System.out.println(errLex);
+        br.Errores("<h4>Error léxico: "+yytext()+" Linea: "+(yyline+1)+" Columna: "+(yycolumn+1)+"</h4>");
+
 }

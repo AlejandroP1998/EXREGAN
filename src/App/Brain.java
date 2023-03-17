@@ -13,6 +13,7 @@ public class Brain {
     Conjunto conj = new Conjunto();
     public ArrayList<listAFD> lista = new ArrayList<>();
     public JSONArray arr = new JSONArray();
+    public ArrayList<String> errors = new ArrayList<>();
 
     public Brain() {
     }
@@ -78,6 +79,68 @@ public class Brain {
             }
         } else {
             System.out.println("No se encontro la expresion " + name);
+        }
+
+    }
+
+    public void Errores(String error) {
+        String p1 = "<!DOCTYPE html>\n"
+                + "<html lang=\"en\">\n"
+                + "\n"
+                + "<head>\n"
+                + "  <meta charset=\"UTF-8\">\n"
+                + "  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+                + "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                + "  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css\" rel=\"stylesheet\"\n"
+                + "    integrity=\"sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD\" crossorigin=\"anonymous\">\n"
+                + "  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n"
+                + "  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n"
+                + "  <link href=\"https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap\" rel=\"stylesheet\">\n"
+                + "  <style>\n"
+                + "    h1{\n"
+                + "      font-family: 'Bungee Spice', cursive;\n"
+                + "      font-size: 4rem;\n"
+                + "      text-align: center;\n"
+                + "    }\n"
+                + "    ul li{\n"
+                + "      font-size: 2rem;\n"
+                + "    }\n"
+                + "  </style>\n"
+                + "</head>\n"
+                + "<title>Errores</title>\n"
+                + "</head>\n"
+                + "\n"
+                + "<body>\n"
+                + "  <div class=\"container d-flex flex-column justify-content-center align-items-center my-5\">\n"
+                + "    <h1 class=\"p-4\">Listado de errores encontrados en la compilación</h1>\n"
+                + "    <ul>";
+
+        String p2 = "</ul>\n"
+                + "  </div>\n"
+                + "\n"
+                + "  <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js\"\n"
+                + "    integrity=\"sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN\"\n"
+                + "    crossorigin=\"anonymous\"></script>\n"
+                + "</body>\n"
+                + "</body>\n"
+                + "\n"
+                + "</html>";
+
+        this.errors.add(error);
+        FileWriter fichero;
+        String ruta = "C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\ERRORES_201712602\\errores.html";
+        try {
+            fichero = new FileWriter(ruta);
+            PrintWriter pw;
+            pw = new PrintWriter(fichero);
+            pw.write(p1);
+            for (int i = 0; i < this.errors.size(); i++) {
+                pw.write("\t\t<li>" + this.errors.get(i) + "</li>\n");
+            }
+            pw.write(p2);
+            pw.close();
+            fichero.close();
+        } catch (IOException e) {
         }
 
     }

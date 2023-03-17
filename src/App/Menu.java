@@ -18,14 +18,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 
 public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
-        this.setExtendedState(this.MAXIMIZED_BOTH);
-        
-        
+        this.setExtendedState(Menu.MAXIMIZED_BOTH);
     }
 
     @SuppressWarnings("unchecked")
@@ -56,6 +55,11 @@ public class Menu extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jScrollPane1.setAutoscrolls(true);
@@ -323,25 +327,24 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_AEbtnActionPerformed
 
     private void erroresbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_erroresbtnActionPerformed
-        this.setVisible(false);
-                JFileChooser jf = new JFileChooser("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\ERRORES_201712602");
-                FileFilter filter = new FileNameExtensionFilter("JPG File", "jpg");
-                File archivo;
-                terminal.setText("");
-                jf.setApproveButtonText("Ver errores");
-                jf.setFileFilter(filter);
-                jf.showOpenDialog(null);
-                if (jf.getSelectedFile() != null) {
-                    archivo = new File(jf.getSelectedFile() + "");
-                    ImageIcon img = new ImageIcon(archivo.getAbsolutePath());
-                    Icon icon = new ImageIcon(
-                            img.getImage().getScaledInstance(imgLabel.getWidth(), imgLabel.getHeight(), Image.SCALE_DEFAULT)
-                    );
-
-                    imgLabel.setIcon(icon);
-                    terminal.setText("Archivo de errores cargado con exito");
-                }
+        try {
+            File file = new File("C:\\Users\\1998j\\OneDrive\\Documentos\\Semestres\\1S 2023\\Compiladores 1\\Proyecto 1\\Reportes\\ERRORES_201712602\\errores.html");
+            if (!Desktop.isDesktopSupported()) {
+                terminal.setText("Archivo de errores no soportado");
+                return;
+            }
+            Desktop desktop = Desktop.getDesktop();
+            if (file.exists()) {
+                terminal.setText("Archivo abierto, revise su navegador predeterminado");
+                desktop.open(file);
+            }
+        } catch (IOException e) {
+        }
     }//GEN-LAST:event_erroresbtnActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

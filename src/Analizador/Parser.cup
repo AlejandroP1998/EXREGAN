@@ -9,12 +9,15 @@ parser code
 {://codigo visible
     Brain br = new Brain();
     Conjunto conjs = new Conjunto();
+    
     public void syntax_error(Symbol s){
-        System.out.println("Error R de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
+        br.Errores("<h2>Error sintáctico recuperable: "+s.value+" Linea: "+(s.left+1)+" Columna: "+(s.right+1)+"</h4>");
+        //System.out.println("Error R de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
-        System.out.println("Error NR de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
+        br.Errores("<h2>Error sintáctico no recuperable: "+s.value+" Linea: "+(s.left+1)+" Columna: "+(s.right+1)+"</h4>");
+        //System.out.println("Error NR de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
 
     public void addConj(String conjunto,String elemento){
