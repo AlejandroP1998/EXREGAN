@@ -10,7 +10,7 @@ public class transitionTable {
 
     public ArrayList<ArrayList> states;
     public int cont;
-    
+    public listAFD lista;
 
     public transitionTable(node root, ArrayList tabla, ArrayList<node> leaves) {
         this.states = new ArrayList();
@@ -86,12 +86,12 @@ public class transitionTable {
                     }
                 }
             }
-
         }
+
     }
 
     public String impTable(String expName) {
-        
+        lista = new listAFD(expName);
         StringBuilder str = new StringBuilder();
         String afd = "";
         afd += "digraph G { \n"
@@ -110,6 +110,7 @@ public class transitionTable {
         str.append("label=<").append("\n");
         str.append("<table border='0' cellborder='1' cellspacing='2'>").append("\n");
         str.append("<tr><td color='blue' bgcolor='blue'>_____Estado_____</td><td colspan='2' color='blue' bgcolor='blue'>_____Transiciones_____</td></tr>").append("\n");
+        
         for (ArrayList state : states) {
             String tran = "[";
 
@@ -124,18 +125,26 @@ public class transitionTable {
             tran = tran.replace("]", "");
             String arreglo = tran;
             String[] afdArray = arreglo.split(";");
+
             for (String afdArray2 : afdArray) {
                 String[] afdArray1 = afdArray2.split(" -> ");
                 if (afdArray1.length > 1) {
                     String nodo = "node" + UUID.randomUUID().toString().replace("-", "");
                     String nodoC = nodo + "[shape=\"none\" label=\"" + afdArray1[1] + "\"]";
+                    String inicio = afdArray1[0].replace(" ", "");
+                    String fin = afdArray1[2].replace(" ", "");
+                    if (inicio.equals(fin)) {
+                        lista.addAtEnd(inicio, afdArray1[1], true);
+                    }else{
+                        lista.addAtEnd(inicio, afdArray1[1], false);
+                    }
                     afdArray1[1] = nodoC;
                     afd += nodoC + "\n";
                     afd += afdArray1[0] + " -> " + nodo + " -> " + afdArray1[2] + ";\n";
+
                 }
 
             }
-            
 
             if (state.get(3).equals(true)) {
                 afd += state.get(0) + "[shape=\"doublecircle\"]";
@@ -149,6 +158,7 @@ public class transitionTable {
                     + "</tr>").append("\n");
             //System.out.println(state.get(0) + "-> " + state.get(1) + "-> " + tran + "aceptacion " + state.get(3));
         }
+        //lista.showList(expName);
         str.append("</table>").append("\n");
         str.append(">];").append("\n");
         str.append("}").append("\n");

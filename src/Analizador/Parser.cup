@@ -17,19 +17,17 @@ parser code
         System.out.println("Error NR de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
     }
 
-    
     public void addConj(String conjunto,String elemento){
         br.addConj(conjunto,elemento);
-    }
-
-    public void printList(){
-        br.printListConj();
     }
 
     public void analizarER(String er, String erName){
         br.analizarER(er,erName);
     }
 
+    public void analizarCadena(String name, String cadena){
+        br.AnalizarEntrada(name,cadena);
+    }
 :}
 
 terminal String CONJUNTO;
@@ -53,7 +51,6 @@ terminal String LETRA;
 terminal String IDENTIFICADOR;
 terminal String OPERADOR;
 terminal String SEPARADOR;
-terminal String GUION_BAJO;
 
 non terminal ini;
 non terminal instrucciones;
@@ -66,6 +63,8 @@ non terminal String expresion;
 non terminal String exp;
 non terminal String conjCall;
 non terminal String separadores;
+non terminal String entradas;
+non terminal String lectura;
 
 start with ini;
 
@@ -78,7 +77,7 @@ instrucciones::= instruccion instrucciones
 
 instruccion ::= 
     CONJUNTO DOS_PUNTOS identificador:a OPERADOR conjunto:b PUNTO_COMA {: addConj(a,b); :}
-    | expresion:a
+    | expresion
     | separadores
     | error PUNTO_COMA
 ;
@@ -145,63 +144,7 @@ conjunto ::=
     | ascii:a COMA PUNTO_COMA:b                         {: RESULT=a + ","+b; :}
     | ascii:a COMA LLAV_ABIERTA:b                       {: RESULT=a + ","+b; :}
     | ascii:a COMA LLAV_CERRADA:b                       {: RESULT=a + ","+b; :}
-    | ascii:a TILDE GUION_BAJO:b                        {: RESULT=a+"~"+b; :}
-    | GUION_BAJO:a TILDE ascii:b                        {: RESULT=a+"~"+b; :}
-    | COMA GUION_BAJO:a                                 {: RESULT=","+a; :}
-    | ascii:a COMA GUION_BAJO:b                         {: RESULT=a + ","+b; :}
-    | GUION_BAJO:a COMA ascii:b                         {: RESULT=a + ","+b; :}
-
-
-
-    
 ;
-    /* 
-    | ascii:a TILDE PUNTO_COMA:b             {: RESULT=a+"~"+b; :}
-    | PUNTO_COMA:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
-     */
-/* conjunto ::= 
-    ENTERO:a TILDE ENTERO:b                  {: RESULT=a+"~"+b; :}
-    | LETRA:a TILDE LETRA:b                  {: RESULT=a+"~"+b; :}
-    | LETRA:a COMA LETRA:b                   {: RESULT=a+","+b; :}
-    | ENTERO:a COMA ENTERO:b                 {: RESULT=a+","+b; :}
-    | ENTERO:a COMA ENTERO:b conjunto:c      {: RESULT=a+","+b+c; :}
-    | LETRA:a COMA LETRA:b conjunto:c        {: RESULT=a+","+b+c; :}
-    | COMA ENTERO:a conjunto:b               {: RESULT=","+a+b; :}
-    | COMA LETRA:a  conjunto:b               {: RESULT=","+a+b; :}
-    | ENTERO:a                               {: RESULT=a; :}
-    | LETRA:a                                {: RESULT=a; :}
-    | ascii:a TILDE ascii:b                  {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE Symbol:b                 {: RESULT=a+"~"+b; :}
-    | Symbol:a TILDE ascii:b                 {: RESULT=a+"~"+b; :}
-    | ascii:a COMA ascii:b                   {: RESULT=a+","+b; :}
-    | ascii:a COMA ascii:b conjunto:c        {: RESULT=a+","+b+c; :}
-    | COMA ascii:a                           {: RESULT=","+a; :}
-    | Symbol:a COMA ascii:b                  {: RESULT=a+","+b; :}
-    | Symbol:a COMA ascii:b conjunto:c       {: RESULT=a+","+b+c; :}
-    | ascii:a COMA Symbol:b                  {: RESULT=a+","+b; :}
-    | ascii:a COMA Symbol:b conjunto:c       {: RESULT=a+","+b+c; :}
-    | COMA ascii:a conjunto:b                {: RESULT=","+a+b; :}
-    | ascii:a TILDE COM_DOBLE:b              {: RESULT=a+"~"+b; :}
-    | COM_DOBLE:a TILDE ascii:b              {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE COM_SIMPLE:b             {: RESULT=a+"~"+b; :}
-    | COM_SIMPLE:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE COMA:b                   {: RESULT=a+"~"+b; :}
-    | COMA:a TILDE ascii:b                   {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE DOS_PUNTOS:b             {: RESULT=a+"~"+b; :}
-    | DOS_PUNTOS:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE PUNTO_COMA:b             {: RESULT=a+"~"+b; :}
-    | PUNTO_COMA:a TILDE ascii:b             {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE LLAV_ABIERTA:b           {: RESULT=a+"~"+b; :}
-    | LLAV_ABIERTA:a TILDE ascii:b           {: RESULT=a+"~"+b; :}
-    | ascii:a TILDE LLAV_CERRADA:b           {: RESULT=a+"~"+b; :}
-    | LLAV_CERRADA:a TILDE ascii:b           {: RESULT=a+"~"+b; :}
-    | COMA COM_DOBLE:a conjunto:b            {: RESULT=","+a+b; :}
-    | COMA COM_SIMPLE:a conjunto:b           {: RESULT=","+a+b; :}
-    | COMA DOS_PUNTOS:a conjunto:b           {: RESULT=","+a+b; :}
-    | COMA PUNTO_COMA:a conjunto:b           {: RESULT=","+a+b; :}
-    | COMA LLAV_ABIERTA:a conjunto:b         {: RESULT=","+a+b; :}
-    | COMA LLAV_CERRADA:a conjunto:b         {: RESULT=","+a+b; :}
-; */
 
 expresion ::=
     identificador:a OPERADOR exp:b PUNTO_COMA {: br.analizarER(b,a); :}
@@ -268,6 +211,21 @@ Symbol ::=
     | ITR:a                                          {: RESULT=a; :}
 ;
 
+lectura ::='
+    identificador:a {: RESULT=a; :}
+    | Symbol:a {: RESULT=a; :}
+    | ascii:a {: RESULT=a; :}
+    | identificador:a lectura:b {: RESULT=a+b; :}
+    | Symbol:a lectura:b {: RESULT=a+b; :}
+    | ascii:a lectura:b {: RESULT=a+b; :}
+;
+
+entradas ::=
+    identificador:a DOS_PUNTOS COM_DOBLE lectura:b COM_DOBLE PUNTO_COMA {: analizarCadena(a,b); :}
+
+;
+
 separadores ::=
     SEPARADOR
+    | entradas
 ;

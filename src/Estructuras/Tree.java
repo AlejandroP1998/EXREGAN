@@ -160,7 +160,6 @@ public class Tree {
             String rootName = "node" + UUID.randomUUID().toString().replaceAll("-", "");
             generarArbol(this.root, rootName);
         } catch (EmptyStackException | NullPointerException e) {
-            System.out.println("No se logro leer la expresion: " + name);
         }
 
     }
@@ -387,7 +386,7 @@ public class Tree {
             //Ejecuta el proceso
             pbuilder.start();
 
-        } catch (IOException e) {
+        } catch (IOException  e) {
             System.out.println(e);
         }
     }

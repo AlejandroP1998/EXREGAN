@@ -21,6 +21,7 @@ public class transicion {
     
     @Override
     public String toString(){
+
         return this.initialState + " -> " + this.transition + " -> " + this.finalState;
     }
 }

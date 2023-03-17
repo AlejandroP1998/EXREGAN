@@ -18,7 +18,5 @@ public class type {
         KLEENE,
         PLUS,
         ITR,
-        EPSILON,
-        STATE,
     };
 }
