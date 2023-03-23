@@ -1,0 +1,23 @@
+digraph G{
+ graph [dpi=1000];
+ label=<Arbol ExpresionReg2>
+ labelloc = t;
+ fontsize = 30; 
+ splines=false;
+
+node27ef1d5c14e944abb0f5ae72ab44eb0f[label="."];
+	node27ef1d5c14e944abb0f5ae72ab44eb0f -> nodefc52c2fd973e4d3b81346453272002c2;
+nodefc52c2fd973e4d3b81346453272002c2[label="."];
+	nodefc52c2fd973e4d3b81346453272002c2 -> node87b579e4fe864b60be3142f61c2db7ae;
+node87b579e4fe864b60be3142f61c2db7ae[label="digito"];
+	nodefc52c2fd973e4d3b81346453272002c2 -> noded74fa5e312414053af66cfd8ec628879;
+noded74fa5e312414053af66cfd8ec628879[label="."];
+	noded74fa5e312414053af66cfd8ec628879 -> node8792795dca324da8b5bc76dfb2b3ebce;
+node8792795dca324da8b5bc76dfb2b3ebce[label="."];
+	noded74fa5e312414053af66cfd8ec628879 -> node66ec8ffd552445759c1270ec004a3bc7;
+node66ec8ffd552445759c1270ec004a3bc7[label="+"];
+	node66ec8ffd552445759c1270ec004a3bc7 -> node22ccb26b97764dcf82c8d067d995b3ca;
+node22ccb26b97764dcf82c8d067d995b3ca[label="digito"];
+	node27ef1d5c14e944abb0f5ae72ab44eb0f -> node80f4cc2a310b42f19b360c109c7991f8;
+node80f4cc2a310b42f19b360c109c7991f8[label="#"];
+}

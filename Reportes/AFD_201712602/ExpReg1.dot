@@ -1,0 +1,21 @@
+digraph G { 
+graph [ dpi = 700 ] 
+label = <AFD: ExpReg1> 
+labelloc = t 
+fontsize=30 
+rankdir=LR;
+node03551f248eab40368e3c20077ff66881[shape="none" label="letra"]
+S0 -> node03551f248eab40368e3c20077ff66881 -> S1 ;
+nodeac3af569ed904e10926a9df773836355[shape="none" label="_"]
+S1 -> nodeac3af569ed904e10926a9df773836355 -> S2 ;
+noded8804753ad374e5d80913c811a0455b1[shape="none" label="letra"]
+  S1 -> noded8804753ad374e5d80913c811a0455b1 -> S2 ;
+node9da8ccb296204a5ab8067398a25a9e5d[shape="none" label="digito"]
+  S1 -> node9da8ccb296204a5ab8067398a25a9e5d -> S2 ;
+S1[shape="doublecircle"]node30c1d2da1bb04103823c5df881af2bf2[shape="none" label="_"]
+S2 -> node30c1d2da1bb04103823c5df881af2bf2 -> S2 ;
+node983e938864bf45479c472f6511043e48[shape="none" label="letra"]
+  S2 -> node983e938864bf45479c472f6511043e48 -> S2 ;
+nodebae750f7af1d4726abc9589492b7ad93[shape="none" label="digito"]
+  S2 -> nodebae750f7af1d4726abc9589492b7ad93 -> S2 ;
+S2[shape="doublecircle"]}

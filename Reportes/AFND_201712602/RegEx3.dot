@@ -1,0 +1,100 @@
+digraph G{
+ graph [dpi=1000];
+ label=<AFND RegEx3>
+ labelloc = t;
+ fontsize = 30; rankdir=LR;
+
+nodef3e06c97aacc40e8a3e1d5f24e801c62[label="S0"]
+
+nodec2117572b90c418582ebed8ca6207bd7[label="S1"]
+
+node851e03aeadc64609a30c65ddb983d95c[label="." shape="none"]
+
+node32a832f38b5f446991c1a16798bd684a[label="#" shape="none"]
+
+node2d16141f759447a99bc9cbf138bc13c0[label="S0"]
+
+nodef3e06c97aacc40e8a3e1d5f24e801c62 -> node851e03aeadc64609a30c65ddb983d95c -> node2d16141f759447a99bc9cbf138bc13c0 -> node32a832f38b5f446991c1a16798bd684a -> nodec2117572b90c418582ebed8ca6207bd7nodec2117572b90c418582ebed8ca6207bd7[label="S1"]
+
+nodea04ba2553c12417dbc37e43f0789693f[label="S3"]
+
+node4e3e2cf8e9684e12922a9bba931e6d7a[label="digito" shape="none"]
+
+node5ab4af3ac90440df857b721170516f2a[label="*" shape="none"]
+
+node5ec5ceb6dd3d404cbfe16270f6395abc[label="S2"]
+
+nodec2117572b90c418582ebed8ca6207bd7 -> node4e3e2cf8e9684e12922a9bba931e6d7a -> node5ec5ceb6dd3d404cbfe16270f6395abc -> node5ab4af3ac90440df857b721170516f2a -> nodea04ba2553c12417dbc37e43f0789693fnodea04ba2553c12417dbc37e43f0789693f[label="S3"]
+
+node4ffbdf2dc4ca4e5e9765571ed071726d[label="S6"]
+
+node3e5c835f89b64b2285565d4132c16569[label="ε" shape="none"]
+
+node04b586894fb1438285ac1e885ccea355[label="ε" shape="none"]
+
+nodedd64db5856024c919d3d225fc322e4b9[label="ε" shape="none"]
+
+nodeb0319054ff314fd5927d19c516698a22[label="ε" shape="none"]
+
+nodea93dcfb3862f4702890532fa0c6f713a[label="|" shape="none"]
+
+node3e6feccea585469eb48cd3e7b153a2e0[label="S4"]
+
+node88ede5957d844873a05ed1b54108f0e0[label="S5"]
+
+nodea04ba2553c12417dbc37e43f0789693f -> node3e5c835f89b64b2285565d4132c16569 -> node3e6feccea585469eb48cd3e7b153a2e0 -> nodea93dcfb3862f4702890532fa0c6f713a -> node88ede5957d844873a05ed1b54108f0e0 -> node04b586894fb1438285ac1e885ccea355 -> node3e6feccea585469eb48cd3e7b153a2e0;
+nodea04ba2553c12417dbc37e43f0789693f -> nodedd64db5856024c919d3d225fc322e4b9 -> node4ffbdf2dc4ca4e5e9765571ed071726d;
+S7 -> nodeb0319054ff314fd5927d19c516698a22 -> node4ffbdf2dc4ca4e5e9765571ed071726d;
+node4ffbdf2dc4ca4e5e9765571ed071726d[label="S6"]
+
+node3821e470cd67433d89a58b649832f8f3[label="S11"]
+
+node2463e199b04f499c82e2e9223df06c3d[label="ε" shape="none"]
+
+node9e11f1b7523f4f488821111d71af6637[label="ε" shape="none"]
+
+node3a17a39c89a64f148abd233ef815ae12[label="ε" shape="none"]
+
+nodeae3be043649b451c8fc9935c70992f0f[label="ε" shape="none"]
+
+node40dd0df72952404396e0444965c8c354[label="_" shape="none"]
+
+node6438425533f8415f9d95c7aead89d8a4[label="|" shape="none"]
+
+node96629173b6654bec870f35721a06fa88[label="S7"]
+
+node73fe359a920446a28364bc6027a6addd[label="S8"]
+
+node1f89804229364330b29665db56dc5193[label="S9"]
+
+node423f706d453f400daaa4fd407f5b8d63[label="S10"]
+
+node4ffbdf2dc4ca4e5e9765571ed071726d -> node2463e199b04f499c82e2e9223df06c3d -> node96629173b6654bec870f35721a06fa88 -> node40dd0df72952404396e0444965c8c354 -> node73fe359a920446a28364bc6027a6addd -> node9e11f1b7523f4f488821111d71af6637 -> node3821e470cd67433d89a58b649832f8f3;
+node4ffbdf2dc4ca4e5e9765571ed071726d -> node3a17a39c89a64f148abd233ef815ae12 -> node1f89804229364330b29665db56dc5193 -> node6438425533f8415f9d95c7aead89d8a4 -> node423f706d453f400daaa4fd407f5b8d63 -> nodeae3be043649b451c8fc9935c70992f0f -> node3821e470cd67433d89a58b649832f8f3;
+node3821e470cd67433d89a58b649832f8f3[label="S11"]
+
+nodea0cc230f515d4677b9473c9c25e9d47a[label="S16"]
+
+nodef1376144bd064923b3b69cd3836336b6[label="ε" shape="none"]
+
+node32bf795490de4068974c6c26572693aa[label="ε" shape="none"]
+
+node69a2c9b2794748fc8003287af2623f9b[label="ε" shape="none"]
+
+nodef7c210c5202a45c487ee6cca3c864917[label="ε" shape="none"]
+
+nodedcf0fc32269248e4a4f88c1a2368fc29[label="letra" shape="none"]
+
+nodeaf88b1d7c2c9459fb3ba07eda3bdca97[label="digito" shape="none"]
+
+node6f37a48bfb714ec3acc06f4408cb1da4[label="S12"]
+
+nodeb0fcdd9e84dd428e92c905718b76f787[label="S13"]
+
+nodef0315c5e6c9040a2ba23321e9f30e2c3[label="S14"]
+
+node65e1631a0d5c4231bd9a2a960c44ab8a[label="S15"]
+
+node3821e470cd67433d89a58b649832f8f3 -> nodef1376144bd064923b3b69cd3836336b6 -> node6f37a48bfb714ec3acc06f4408cb1da4 -> nodedcf0fc32269248e4a4f88c1a2368fc29 -> nodeb0fcdd9e84dd428e92c905718b76f787 -> node32bf795490de4068974c6c26572693aa -> nodea0cc230f515d4677b9473c9c25e9d47a;
+node3821e470cd67433d89a58b649832f8f3 -> node69a2c9b2794748fc8003287af2623f9b -> nodef0315c5e6c9040a2ba23321e9f30e2c3 -> nodeaf88b1d7c2c9459fb3ba07eda3bdca97 -> node65e1631a0d5c4231bd9a2a960c44ab8a -> nodef7c210c5202a45c487ee6cca3c864917 -> nodea0cc230f515d4677b9473c9c25e9d47a;
+}

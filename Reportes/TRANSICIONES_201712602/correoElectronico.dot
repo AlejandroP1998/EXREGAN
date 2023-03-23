@@ -1,0 +1,23 @@
+digraph G {
+splines=false;
+graph [ dpi = 700 ];
+label = <Tabla de transiciones: correoElectronico>
+labelloc = t
+fontsize=30
+tbl [
+shape=plaintext
+label=<
+<table border='0' cellborder='1' cellspacing='2'>
+<tr><td color='blue' bgcolor='blue'>_____Estado_____</td><td colspan='2' color='blue' bgcolor='blue'>_____Transiciones_____</td></tr>
+<tr><td>S0</td><td colspan="2">S0  ---  minuscula  ---  S1 ;  S0  ---  mayuscula  ---  S1 ;  </td></tr>
+<tr><td>S1</td><td colspan="2">S1  ---  simbolos  ---  S2 ;  S1  ---  minuscula  ---  S2 ;  S1  ---  mayuscula  ---  S2 ;  S1  ---  numero  ---  S2 ;  </td></tr>
+<tr><td>S2</td><td colspan="2">S2  ---  simbolos  ---  S2 ;  S2  ---  minuscula  ---  S2 ;  S2  ---  mayuscula  ---  S2 ;  S2  ---  numero  ---  S2 ;  S2  ---  @  ---  S3 ;  </td></tr>
+<tr><td>S3</td><td colspan="2">S3  ---  minuscula  ---  S4 ;  S3  ---  mayuscula  ---  S4 ;  </td></tr>
+<tr><td>S4</td><td colspan="2">S4  ---  minuscula  ---  S4 ;  S4  ---  mayuscula  ---  S4 ;  S4  ---  .  ---  S5 ;  </td></tr>
+<tr><td>S5</td><td colspan="2">S5  ---  c  ---  S6 ;  </td></tr>
+<tr><td>S6</td><td colspan="2">S6  ---  o  ---  S7 ;  </td></tr>
+<tr><td>S7</td><td colspan="2">S7  ---  m  ---  S8 ;  </td></tr>
+<tr><td>S8</td><td colspan="2"></td></tr>
+</table>
+>];
+}

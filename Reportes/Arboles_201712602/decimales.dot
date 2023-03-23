@@ -1,0 +1,25 @@
+digraph G{
+ graph [dpi=1000];
+ label=<Arbol decimales>
+ labelloc = t;
+ fontsize = 30; 
+ splines=false;
+
+node673d1f0f904f458ebba87694735d96f1[label="."];
+	node673d1f0f904f458ebba87694735d96f1 -> node10cae03002d645e5b175b2cb6826dc93;
+node10cae03002d645e5b175b2cb6826dc93[label="."];
+	node10cae03002d645e5b175b2cb6826dc93 -> node4aa80b0124f542dfa48a8b2f045a246a;
+node4aa80b0124f542dfa48a8b2f045a246a[label="+"];
+	node4aa80b0124f542dfa48a8b2f045a246a -> node35252c7060e44eb2a57d741ec37b4388;
+node35252c7060e44eb2a57d741ec37b4388[label="digito"];
+	node10cae03002d645e5b175b2cb6826dc93 -> nodeca5082a153af4f3f9959b415d32182fd;
+nodeca5082a153af4f3f9959b415d32182fd[label="."];
+	nodeca5082a153af4f3f9959b415d32182fd -> nodee065af0d77c64aa3ad25e660b15d706f;
+nodee065af0d77c64aa3ad25e660b15d706f[label="."];
+	nodeca5082a153af4f3f9959b415d32182fd -> node9bddd6b27a6241ee98c8f49314781cce;
+node9bddd6b27a6241ee98c8f49314781cce[label="+"];
+	node9bddd6b27a6241ee98c8f49314781cce -> node07d88ce13fa54893b56a45461272b6a1;
+node07d88ce13fa54893b56a45461272b6a1[label="digito"];
+	node673d1f0f904f458ebba87694735d96f1 -> nodeeb39e9e5d8834edb908a780aad3bbdd5;
+nodeeb39e9e5d8834edb908a780aad3bbdd5[label="#"];
+}

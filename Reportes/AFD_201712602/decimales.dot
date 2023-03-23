@@ -1,0 +1,17 @@
+digraph G { 
+graph [ dpi = 700 ] 
+label = <AFD: decimales> 
+labelloc = t 
+fontsize=30 
+rankdir=LR;
+node5c4c8f8a172e4a31952c6fa9f9e2fe8f[shape="none" label="digito"]
+S0 -> node5c4c8f8a172e4a31952c6fa9f9e2fe8f -> S1 ;
+nodece2d22263f614756ad3e7a422ebdbf74[shape="none" label="digito"]
+S1 -> nodece2d22263f614756ad3e7a422ebdbf74 -> S1 ;
+node93017403881a47dba52b61c3c5206d39[shape="none" label="."]
+  S1 -> node93017403881a47dba52b61c3c5206d39 -> S2 ;
+nodeb2e2ebaa72de4d359820ff41e7fc0ee2[shape="none" label="digito"]
+S2 -> nodeb2e2ebaa72de4d359820ff41e7fc0ee2 -> S3 ;
+node28ea37f6788247c6b7c25e76c8ea05d5[shape="none" label="digito"]
+S3 -> node28ea37f6788247c6b7c25e76c8ea05d5 -> S3 ;
+S3[shape="doublecircle"]}

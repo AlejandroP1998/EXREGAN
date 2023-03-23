@@ -1,0 +1,45 @@
+digraph G { 
+graph [ dpi = 700 ] 
+label = <AFD: correoElectronico> 
+labelloc = t 
+fontsize=30 
+rankdir=LR;
+nodef43db31b959f4a3e9a22294bf754c81d[shape="none" label="minuscula"]
+S0 -> nodef43db31b959f4a3e9a22294bf754c81d -> S1 ;
+node1b9adf61ff0543bf97e116a19b77d80f[shape="none" label="mayuscula"]
+  S0 -> node1b9adf61ff0543bf97e116a19b77d80f -> S1 ;
+nodefdab8f7273db4f2fb00455ffe972c99e[shape="none" label="simbolos"]
+S1 -> nodefdab8f7273db4f2fb00455ffe972c99e -> S2 ;
+node4707cd8a88e54ebe8cc314d4de0180cb[shape="none" label="minuscula"]
+  S1 -> node4707cd8a88e54ebe8cc314d4de0180cb -> S2 ;
+nodeaffcff24b20b4800bf5a4461b3d2c659[shape="none" label="mayuscula"]
+  S1 -> nodeaffcff24b20b4800bf5a4461b3d2c659 -> S2 ;
+node1bec98ab64874fcc8c52b9f2e5aed356[shape="none" label="numero"]
+  S1 -> node1bec98ab64874fcc8c52b9f2e5aed356 -> S2 ;
+node26268043f51a4dd0babe20476ee3365f[shape="none" label="simbolos"]
+S2 -> node26268043f51a4dd0babe20476ee3365f -> S2 ;
+node050a84c3bf504ad98532da3d50e336f3[shape="none" label="minuscula"]
+  S2 -> node050a84c3bf504ad98532da3d50e336f3 -> S2 ;
+nodeb77090ee453b4088b20e3838dacc7e9b[shape="none" label="mayuscula"]
+  S2 -> nodeb77090ee453b4088b20e3838dacc7e9b -> S2 ;
+node6b47d866856842caa429ac27a237a285[shape="none" label="numero"]
+  S2 -> node6b47d866856842caa429ac27a237a285 -> S2 ;
+node665d974fa7d14ca1966f4ecf1bb9aa53[shape="none" label="@"]
+  S2 -> node665d974fa7d14ca1966f4ecf1bb9aa53 -> S3 ;
+node64960c3a28c5454c8db6031f4821d3c8[shape="none" label="minuscula"]
+S3 -> node64960c3a28c5454c8db6031f4821d3c8 -> S4 ;
+node3e87185d854f4c94b341f58459face4d[shape="none" label="mayuscula"]
+  S3 -> node3e87185d854f4c94b341f58459face4d -> S4 ;
+node646836e51d8f4e158ca7ae89fc04ed72[shape="none" label="minuscula"]
+S4 -> node646836e51d8f4e158ca7ae89fc04ed72 -> S4 ;
+nodeef4329cdad5d4992bc299043a8621c8c[shape="none" label="mayuscula"]
+  S4 -> nodeef4329cdad5d4992bc299043a8621c8c -> S4 ;
+node4cff08145d16462dab93dcfe06b80b0a[shape="none" label="."]
+  S4 -> node4cff08145d16462dab93dcfe06b80b0a -> S5 ;
+node2ce2fe13ea5f4b1fb9a856c8bb508a98[shape="none" label="c"]
+S5 -> node2ce2fe13ea5f4b1fb9a856c8bb508a98 -> S6 ;
+node766029c881dd45fd828994f85c780706[shape="none" label="o"]
+S6 -> node766029c881dd45fd828994f85c780706 -> S7 ;
+node42e26b6afbf14d49a77175177acd7380[shape="none" label="m"]
+S7 -> node42e26b6afbf14d49a77175177acd7380 -> S8 ;
+S8[shape="doublecircle"]}

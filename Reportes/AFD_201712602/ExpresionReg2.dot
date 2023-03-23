@@ -1,0 +1,15 @@
+digraph G { 
+graph [ dpi = 700 ] 
+label = <AFD: ExpresionReg2> 
+labelloc = t 
+fontsize=30 
+rankdir=LR;
+nodeeb5febdc79ab4ba79c304c9d1d086817[shape="none" label="digito"]
+S0 -> nodeeb5febdc79ab4ba79c304c9d1d086817 -> S1 ;
+node1b781fcee1cb4013b9f05d7625b47c49[shape="none" label="."]
+S1 -> node1b781fcee1cb4013b9f05d7625b47c49 -> S2 ;
+nodeff14cce09cae4d42ade2a089de65ce5b[shape="none" label="digito"]
+S2 -> nodeff14cce09cae4d42ade2a089de65ce5b -> S3 ;
+node6098944bb6b24b0b8986facb5f86acf2[shape="none" label="digito"]
+S3 -> node6098944bb6b24b0b8986facb5f86acf2 -> S3 ;
+S3[shape="doublecircle"]}

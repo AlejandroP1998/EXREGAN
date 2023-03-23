@@ -1,0 +1,27 @@
+digraph G{
+ graph [dpi=1000];
+ label=<Arbol identificador>
+ labelloc = t;
+ fontsize = 30; 
+ splines=false;
+
+noded5f5f6e7884e4138bfc5dbd478b3f167[label="."];
+	noded5f5f6e7884e4138bfc5dbd478b3f167 -> noded8c79559b95042989385bd1811d4a2e8;
+noded8c79559b95042989385bd1811d4a2e8[label="."];
+	noded8c79559b95042989385bd1811d4a2e8 -> node429f93bb04a5488cb600cc9b3762177d;
+node429f93bb04a5488cb600cc9b3762177d[label="abecedarioMinus"];
+	noded8c79559b95042989385bd1811d4a2e8 -> noded5dbec6dd50545908875c8421d2bb703;
+noded5dbec6dd50545908875c8421d2bb703[label="*"];
+	noded5dbec6dd50545908875c8421d2bb703 -> node7b3d3a5999d3405fbfca858df3f6a237;
+node7b3d3a5999d3405fbfca858df3f6a237[label="|"];
+	node7b3d3a5999d3405fbfca858df3f6a237 -> node19478920f66b4b50897b385a38926c5b;
+node19478920f66b4b50897b385a38926c5b[label="_"];
+	node7b3d3a5999d3405fbfca858df3f6a237 -> node98b58e46c53b4711b0f2512e9f3b320d;
+node98b58e46c53b4711b0f2512e9f3b320d[label="|"];
+	node98b58e46c53b4711b0f2512e9f3b320d -> node7c24cebd34ab441e8a65c939cd6fc51a;
+node7c24cebd34ab441e8a65c939cd6fc51a[label="abecedarioMinus"];
+	node98b58e46c53b4711b0f2512e9f3b320d -> node922cd8c7efa54528b8e9f0a41027a39c;
+node922cd8c7efa54528b8e9f0a41027a39c[label="digito"];
+	noded5f5f6e7884e4138bfc5dbd478b3f167 -> noded3c4e44b5049499687a7ffb895a4aefd;
+noded3c4e44b5049499687a7ffb895a4aefd[label="#"];
+}

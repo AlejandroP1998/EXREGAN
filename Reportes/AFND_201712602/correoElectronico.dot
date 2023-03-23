@@ -1,0 +1,259 @@
+digraph G{
+ graph [dpi=1000];
+ label=<AFND correoElectronico>
+ labelloc = t;
+ fontsize = 30; rankdir=LR;
+
+nodeda24f9b5410849a4bfee617aa812fabc[label="S0"]
+
+node8e69f19335454260a0e5b4ef32d5f373[label="S1"]
+
+node496bff4f836044fa88e4d683420ac5b0[label="." shape="none"]
+
+nodea072c65c241448f391a85b8c99e8f2ba[label="#" shape="none"]
+
+node6ce867b2016b4646878136a211b69e3e[label="S0"]
+
+nodeda24f9b5410849a4bfee617aa812fabc -> node496bff4f836044fa88e4d683420ac5b0 -> node6ce867b2016b4646878136a211b69e3e -> nodea072c65c241448f391a85b8c99e8f2ba -> node8e69f19335454260a0e5b4ef32d5f373node8e69f19335454260a0e5b4ef32d5f373[label="S1"]
+
+node9f6b2ffed3364660aaa6cc66fddd8d70[label="S3"]
+
+node5624d367e04448d7b5a14aa2616b2d67[label="|" shape="none"]
+
+node89285b12d4e84ead9def4350587a7ee5[label="." shape="none"]
+
+node9bb8a2fffeb848ada6989c83d42b5548[label="S2"]
+
+node8e69f19335454260a0e5b4ef32d5f373 -> node5624d367e04448d7b5a14aa2616b2d67 -> node9bb8a2fffeb848ada6989c83d42b5548 -> node89285b12d4e84ead9def4350587a7ee5 -> node9f6b2ffed3364660aaa6cc66fddd8d70node9f6b2ffed3364660aaa6cc66fddd8d70[label="S3"]
+
+node34ad001a73834a278f91d1599f9caafa[label="S8"]
+
+node466049767596467e8e6845a163e173e3[label="ε" shape="none"]
+
+node6e0443a1dd2e45f0b4dd405f04fc8caa[label="ε" shape="none"]
+
+nodef4c1d06a45af4b06ad5d4d2ea2489aa5[label="ε" shape="none"]
+
+node1cd35d7a39ad44838cd7297c2e23bb95[label="ε" shape="none"]
+
+node9d4ca28891b44cfaa45c88d5a75fd3fb[label="minuscula" shape="none"]
+
+nodee0e8719daaef42d3a047ef4551d95c22[label="mayuscula" shape="none"]
+
+node92625adba4974799b6db77f01ba00a2e[label="S4"]
+
+nodeee661db161ca417eb0b18aa840dd0ea7[label="S5"]
+
+node49a28b76ce8c4cbeb27a55e04f590ba1[label="S6"]
+
+nodebb9005a5b3a145fdb498e07397401649[label="S7"]
+
+node9f6b2ffed3364660aaa6cc66fddd8d70 -> node466049767596467e8e6845a163e173e3 -> node92625adba4974799b6db77f01ba00a2e -> node9d4ca28891b44cfaa45c88d5a75fd3fb -> nodeee661db161ca417eb0b18aa840dd0ea7 -> node6e0443a1dd2e45f0b4dd405f04fc8caa -> node34ad001a73834a278f91d1599f9caafa;
+node9f6b2ffed3364660aaa6cc66fddd8d70 -> nodef4c1d06a45af4b06ad5d4d2ea2489aa5 -> node49a28b76ce8c4cbeb27a55e04f590ba1 -> nodee0e8719daaef42d3a047ef4551d95c22 -> nodebb9005a5b3a145fdb498e07397401649 -> node1cd35d7a39ad44838cd7297c2e23bb95 -> node34ad001a73834a278f91d1599f9caafa;
+node34ad001a73834a278f91d1599f9caafa[label="S8"]
+
+nodeb94a5a3c69ca41ff9bcd4cc2258d2e46[label="S10"]
+
+node3ee06f34c2514f548c2e7830dc46fb59[label="+" shape="none"]
+
+node7ee15e5a00364d5191df87c4b208730d[label="." shape="none"]
+
+node0567e4261c894db5a25e85e67b9b92e8[label="S9"]
+
+node34ad001a73834a278f91d1599f9caafa -> node3ee06f34c2514f548c2e7830dc46fb59 -> node0567e4261c894db5a25e85e67b9b92e8 -> node7ee15e5a00364d5191df87c4b208730d -> nodeb94a5a3c69ca41ff9bcd4cc2258d2e46nodeb94a5a3c69ca41ff9bcd4cc2258d2e46[label="S10"]
+
+node82590574534b46fbbee7f554e2d7c3b7[label="S13"]
+
+node0b9a9e40c97a459a82b03b3d4c0127cf[label="ε" shape="none"]
+
+node9dd6398795c94ec29f080c4449ef378c[label="ε" shape="none"]
+
+node3c287ecad76349edb2d8b5355c438072[label="ε" shape="none"]
+
+nodec6e8dde4a97446b48f0b0f9d83fa8127[label="ε" shape="none"]
+
+node3c05ad6b832845349138187d878f6d1c[label="|" shape="none"]
+
+nodeb24d12318404425ba96b10c718bcc847[label="S11"]
+
+nodef883a0bbe5ec48148a2a391cff3d3c5e[label="S12"]
+
+nodeb94a5a3c69ca41ff9bcd4cc2258d2e46 -> node0b9a9e40c97a459a82b03b3d4c0127cf -> nodeb24d12318404425ba96b10c718bcc847 -> node3c05ad6b832845349138187d878f6d1c -> nodef883a0bbe5ec48148a2a391cff3d3c5e -> node9dd6398795c94ec29f080c4449ef378c -> nodeb24d12318404425ba96b10c718bcc847;
+nodeb94a5a3c69ca41ff9bcd4cc2258d2e46 -> node3c287ecad76349edb2d8b5355c438072 -> node82590574534b46fbbee7f554e2d7c3b7;
+S14 -> nodec6e8dde4a97446b48f0b0f9d83fa8127 -> node82590574534b46fbbee7f554e2d7c3b7;
+node82590574534b46fbbee7f554e2d7c3b7[label="S13"]
+
+node3f3f86894a1f4b9983acd8d6895c034c[label="S18"]
+
+node74073d8f750a47e38159a8056035df75[label="ε" shape="none"]
+
+nodef62739ee40d54d8e9b0f5a865431e628[label="ε" shape="none"]
+
+nodee46dc72303af4b44abee0d424987ffef[label="ε" shape="none"]
+
+noded31be1bba4af44d39a10df5c81c8a7a2[label="ε" shape="none"]
+
+node5bcfb3598cf94750ab58b6b565268792[label="|" shape="none"]
+
+node86095c875c2945efa1f93c9d0c6d2f0c[label="numero" shape="none"]
+
+node6dad048881cc496e89ee4425eb5aa0aa[label="S14"]
+
+node2e2ccb6cd07140c4a93da897eaa698a8[label="S15"]
+
+nodea58d97537a2e4c73a6b7b69bd035987e[label="S16"]
+
+noded17e58868dae4767b82136eb477efd8a[label="S17"]
+
+node82590574534b46fbbee7f554e2d7c3b7 -> node74073d8f750a47e38159a8056035df75 -> node6dad048881cc496e89ee4425eb5aa0aa -> node5bcfb3598cf94750ab58b6b565268792 -> node2e2ccb6cd07140c4a93da897eaa698a8 -> nodef62739ee40d54d8e9b0f5a865431e628 -> node3f3f86894a1f4b9983acd8d6895c034c;
+node82590574534b46fbbee7f554e2d7c3b7 -> nodee46dc72303af4b44abee0d424987ffef -> nodea58d97537a2e4c73a6b7b69bd035987e -> node86095c875c2945efa1f93c9d0c6d2f0c -> noded17e58868dae4767b82136eb477efd8a -> noded31be1bba4af44d39a10df5c81c8a7a2 -> node3f3f86894a1f4b9983acd8d6895c034c;
+node3f3f86894a1f4b9983acd8d6895c034c[label="S18"]
+
+node5ba3f6d0d0134a8a8bf821742adab8fc[label="S23"]
+
+node4969202b0b1b4528bc3bde7ceb4b3df1[label="ε" shape="none"]
+
+node687f43d694fe49a4b28360a4a497f559[label="ε" shape="none"]
+
+nodeccd8d9811ef2482fbfc29a618e929e8d[label="ε" shape="none"]
+
+nodee7545807a4514aab9ee6906f4089fa88[label="ε" shape="none"]
+
+node59be0df0af914d729adf879282452a4b[label="|" shape="none"]
+
+node1273076d8c404902980debe951d7284f[label="mayuscula" shape="none"]
+
+node2a8fb84a21bd4c818dfb3d67bb08a27a[label="S19"]
+
+node74da9500fec640189b3974bf63c69d49[label="S20"]
+
+nodeb34e1af86d884fe591dcbbd5514acdb7[label="S21"]
+
+nodefea36bf21d63431b9f44657e4333b5a4[label="S22"]
+
+node3f3f86894a1f4b9983acd8d6895c034c -> node4969202b0b1b4528bc3bde7ceb4b3df1 -> node2a8fb84a21bd4c818dfb3d67bb08a27a -> node59be0df0af914d729adf879282452a4b -> node74da9500fec640189b3974bf63c69d49 -> node687f43d694fe49a4b28360a4a497f559 -> node5ba3f6d0d0134a8a8bf821742adab8fc;
+node3f3f86894a1f4b9983acd8d6895c034c -> nodeccd8d9811ef2482fbfc29a618e929e8d -> nodeb34e1af86d884fe591dcbbd5514acdb7 -> node1273076d8c404902980debe951d7284f -> nodefea36bf21d63431b9f44657e4333b5a4 -> nodee7545807a4514aab9ee6906f4089fa88 -> node5ba3f6d0d0134a8a8bf821742adab8fc;
+node5ba3f6d0d0134a8a8bf821742adab8fc[label="S23"]
+
+nodece7832d7521645b0ab003212858faf17[label="S28"]
+
+nodeed942fa6072d41ada1c357383271e9f7[label="ε" shape="none"]
+
+nodea5c05fa24ce64120a96324fbb68a79fc[label="ε" shape="none"]
+
+nodeac7857916fbe421ab2729b8ad20ef6da[label="ε" shape="none"]
+
+node22820aa784834da5aca04fdf28b88d4d[label="ε" shape="none"]
+
+node684abfc299094a53886ac7e72b7b2872[label="simbolos" shape="none"]
+
+node9c40630491674dc2b986e092c7c092eb[label="minuscula" shape="none"]
+
+node7b5ab0c6d8eb4e9391b33fe44b539431[label="S24"]
+
+noded05f147bd1024c73a5aac8f4db688824[label="S25"]
+
+node4ab8805a085b4947ba4f9027074c7d65[label="S26"]
+
+node93c60386ff0745b1a3f3ed59a9a9d33f[label="S27"]
+
+node5ba3f6d0d0134a8a8bf821742adab8fc -> nodeed942fa6072d41ada1c357383271e9f7 -> node7b5ab0c6d8eb4e9391b33fe44b539431 -> node684abfc299094a53886ac7e72b7b2872 -> noded05f147bd1024c73a5aac8f4db688824 -> nodea5c05fa24ce64120a96324fbb68a79fc -> nodece7832d7521645b0ab003212858faf17;
+node5ba3f6d0d0134a8a8bf821742adab8fc -> nodeac7857916fbe421ab2729b8ad20ef6da -> node4ab8805a085b4947ba4f9027074c7d65 -> node9c40630491674dc2b986e092c7c092eb -> node93c60386ff0745b1a3f3ed59a9a9d33f -> node22820aa784834da5aca04fdf28b88d4d -> nodece7832d7521645b0ab003212858faf17;
+nodece7832d7521645b0ab003212858faf17[label="S28"]
+
+node0f5194d38fdc455684dc28b3626b1e2e[label="S30"]
+
+node7da18b8819c648ebab03a083b617eca2[label="@" shape="none"]
+
+nodefc1f6a0cbf5f4993ac49228a66419758[label="." shape="none"]
+
+node7d8acc2a88fc4b92991c70ff3c7ee64c[label="S29"]
+
+nodece7832d7521645b0ab003212858faf17 -> node7da18b8819c648ebab03a083b617eca2 -> node7d8acc2a88fc4b92991c70ff3c7ee64c -> nodefc1f6a0cbf5f4993ac49228a66419758 -> node0f5194d38fdc455684dc28b3626b1e2enode0f5194d38fdc455684dc28b3626b1e2e[label="S30"]
+
+node22c4e7dbe936414982eee1daa27fa12d[label="S32"]
+
+node922696aeb83e44639efd9aabd070c24b[label="+" shape="none"]
+
+nodeb34d2812af844941a8f3be3fb5017d0a[label="." shape="none"]
+
+node2e62cc0ffc8945d2ac90fabccbd390fe[label="S31"]
+
+node0f5194d38fdc455684dc28b3626b1e2e -> node922696aeb83e44639efd9aabd070c24b -> node2e62cc0ffc8945d2ac90fabccbd390fe -> nodeb34d2812af844941a8f3be3fb5017d0a -> node22c4e7dbe936414982eee1daa27fa12dnode22c4e7dbe936414982eee1daa27fa12d[label="S32"]
+
+node79f97b8eccda48c894325c8527252b1a[label="S35"]
+
+node4cfaaf8663824f119b0e6ad623682fc2[label="ε" shape="none"]
+
+nodef8996e4a84284075ac4f88a0d9c76fc2[label="ε" shape="none"]
+
+node4d434e6e67e84198bcd2fb142b07c00b[label="ε" shape="none"]
+
+nodeb6cafc1028fc47edaf422181680ef845[label="ε" shape="none"]
+
+nodec10d5b1d710b4f61adac7cbdcacba9af[label="|" shape="none"]
+
+nodecbaafb0d2f2140c4bd51a2c862abd2a8[label="S33"]
+
+node7b1ecfd1bca64adcbd6952ac0d6d3482[label="S34"]
+
+node22c4e7dbe936414982eee1daa27fa12d -> node4cfaaf8663824f119b0e6ad623682fc2 -> nodecbaafb0d2f2140c4bd51a2c862abd2a8 -> nodec10d5b1d710b4f61adac7cbdcacba9af -> node7b1ecfd1bca64adcbd6952ac0d6d3482 -> nodef8996e4a84284075ac4f88a0d9c76fc2 -> nodecbaafb0d2f2140c4bd51a2c862abd2a8;
+node22c4e7dbe936414982eee1daa27fa12d -> node4d434e6e67e84198bcd2fb142b07c00b -> node79f97b8eccda48c894325c8527252b1a;
+S36 -> nodeb6cafc1028fc47edaf422181680ef845 -> node79f97b8eccda48c894325c8527252b1a;
+node79f97b8eccda48c894325c8527252b1a[label="S35"]
+
+node3c3384bdfc634c049e6720975140c122[label="S40"]
+
+node49070569f28b482aa6b8d4607f934cc3[label="ε" shape="none"]
+
+node4cde873cfcac41f98dd1629c9c5e8e4a[label="ε" shape="none"]
+
+node61325367b5ab4f0e9a8ccf0b4e770aab[label="ε" shape="none"]
+
+nodef29d4cb52ee241d0b9ffa1783536583a[label="ε" shape="none"]
+
+nodec61eaf81b5cb4550a8dcd6cdeaeb08e8[label="minuscula" shape="none"]
+
+node688af50e2c4a4f5595bfe135b3d06030[label="mayuscula" shape="none"]
+
+node26190760aa9948b0b54ab8cc6d57472c[label="S36"]
+
+nodeed815ebb09c74627ae09b267bddb9466[label="S37"]
+
+node27518db1fc8f4162b2d3117026e5ee1a[label="S38"]
+
+nodeac790cb90ac942018b212d50661a2753[label="S39"]
+
+node79f97b8eccda48c894325c8527252b1a -> node49070569f28b482aa6b8d4607f934cc3 -> node26190760aa9948b0b54ab8cc6d57472c -> nodec61eaf81b5cb4550a8dcd6cdeaeb08e8 -> nodeed815ebb09c74627ae09b267bddb9466 -> node4cde873cfcac41f98dd1629c9c5e8e4a -> node3c3384bdfc634c049e6720975140c122;
+node79f97b8eccda48c894325c8527252b1a -> node61325367b5ab4f0e9a8ccf0b4e770aab -> node27518db1fc8f4162b2d3117026e5ee1a -> node688af50e2c4a4f5595bfe135b3d06030 -> nodeac790cb90ac942018b212d50661a2753 -> nodef29d4cb52ee241d0b9ffa1783536583a -> node3c3384bdfc634c049e6720975140c122;
+node3c3384bdfc634c049e6720975140c122[label="S40"]
+
+nodece8651fbc43044c49bd387d5b1985d8d[label="S42"]
+
+node05cc48649dea42a6b77a60e42657453f[label="." shape="none"]
+
+nodedece5298dbae4f9dbe5a0282c6efe408[label="." shape="none"]
+
+node19a412b5b3284d9ab3d6a4accecf06d5[label="S41"]
+
+node3c3384bdfc634c049e6720975140c122 -> node05cc48649dea42a6b77a60e42657453f -> node19a412b5b3284d9ab3d6a4accecf06d5 -> nodedece5298dbae4f9dbe5a0282c6efe408 -> nodece8651fbc43044c49bd387d5b1985d8dnodece8651fbc43044c49bd387d5b1985d8d[label="S42"]
+
+node802d948f278d4762a65844be27900de8[label="S44"]
+
+node69fe2dda84914ff9a2ef6af936bf1c48[label="c" shape="none"]
+
+nodec972beaa35404a6f9d00e64133fb0ffe[label="." shape="none"]
+
+node4c49a46abe8e4ee09615f6639934ed93[label="S43"]
+
+nodece8651fbc43044c49bd387d5b1985d8d -> node69fe2dda84914ff9a2ef6af936bf1c48 -> node4c49a46abe8e4ee09615f6639934ed93 -> nodec972beaa35404a6f9d00e64133fb0ffe -> node802d948f278d4762a65844be27900de8node802d948f278d4762a65844be27900de8[label="S44"]
+
+node54fb28e1c7d94d95b165e49bca4fdce3[label="S46"]
+
+nodec3e3458b19dd457f8bd78cfffab77eb1[label="o" shape="none"]
+
+nodefe9ceff3984640888172ba9ebd2cc559[label="m" shape="none"]
+
+nodef80371bf8c4841bf97e120ad029ffac4[label="S45"]
+
+node802d948f278d4762a65844be27900de8 -> nodec3e3458b19dd457f8bd78cfffab77eb1 -> nodef80371bf8c4841bf97e120ad029ffac4 -> nodefe9ceff3984640888172ba9ebd2cc559 -> node54fb28e1c7d94d95b165e49bca4fdce3}
