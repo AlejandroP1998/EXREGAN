@@ -225,7 +225,6 @@ lectura ::='
 
 entradas ::=
     identificador:a DOS_PUNTOS COM_DOBLE lectura:b COM_DOBLE PUNTO_COMA {: analizarCadena(a,b); :}
-
 ;
 
 separadores ::=
